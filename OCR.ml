@@ -21,8 +21,9 @@ let show img dst =
 let level (r, g, b) = 0.3 *. float r +. 0.59 *. float g +. 0.11 *.float  b;;
 
 let color2green (r,g,b) = 
-  (int_of_float ((level(r, g, b) *. 0.3)*100) , int_of_float ((level(r, g, b) *.
-  0.59)*100) , int_of_float ((level(r, g, b) *. 0.11)*100));;
+  (int_of_float (level(r, g, b) *. 255.) , int_of_float (level(r, g, b) *.
+  255.), int_of_float (level(r, g, b) *. 255.));;
+
 
 let surexposition (r, g, b) =
   (int_of_float (level(r, g, b) /. 0.3) , int_of_float (level(r, g, b) /. 0.59) , int_of_float (level(r, g, b) /. 0.11));;
