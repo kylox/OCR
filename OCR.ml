@@ -26,10 +26,10 @@ let color2green (r,g,b) =
 let surexposition (r, g, b) =
   (int_of_float (level(r, g, b) /. 0.3) , int_of_float (level(r, g, b) /. 0.59) , int_of_float (level(r, g, b) /. 0.11));;
 
-let image2grey img dst  =
+let image2grey f img dst  =
   for x = 0 to ((Sdlvideo.surface_info img).Sdlvideo.h-1) do
     for y = 0  to ((Sdlvideo.surface_info img).Sdlvideo.w-1) do
-     let (r,g,b) = surexposition (Sdlvideo.get_pixel_color img x y) in
+     let (r,g,b) = f (Sdlvideo.get_pixel_color img x y) in
       Sdlvideo.put_pixel_color dst x y (r,g,b)
     done
   done
@@ -43,7 +43,7 @@ let main () =
     let (w,h) = get_dims img in
     let tem = Sdlvideo.create_RGB_surface_format img [] w h in
     let display = Sdlvideo.set_video_mode w h [`DOUBLEBUF] in
-    image2grey img tem; 
+    image2grey surexpostion img tem; 
     show tem display;
     wait_key ();
     exit 0
