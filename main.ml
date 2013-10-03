@@ -1,7 +1,3 @@
-open "image_helper.ml"
-open "pre_treatment.ml"
-open "post_treatment.ml"
-
 let sdl_init () =
   begin
     Sdl.init [`EVERYTHING];
@@ -26,8 +22,10 @@ let main () =
     let tem = Sdlvideo.create_RGB_surface_format img [] w h in
     let dst = Sdlvideo.create_RGB_surface_format img [] w h in
     let display = Sdlvideo.set_video_mode w h [`DOUBLEBUF] in
-    wait_key ();
-    exit 0
+		image_to_grey img tem;
+		show tem display;
+		wait_key ();
+		exit 0
   end
   
 let _ = main ()
