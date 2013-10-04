@@ -1,5 +1,5 @@
 RESULT     = ocr
-SOURCES    = OCR.ml
+SOURCES    = image_helper.ml  median.ml post_treatment.ml pre_treatment.ml main.ml
 LIBS       = bigarray sdl sdlloader
 INCDIRS    = +sdl
 
