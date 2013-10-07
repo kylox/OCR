@@ -7,3 +7,7 @@
 *.cmx
 *.cmxs
 *.cmxa
+*.ml.swn
+*.ml.swo
+*.ml.swp
+*.swp

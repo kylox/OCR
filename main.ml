@@ -17,15 +17,14 @@ let main () =
     if Array.length (Sys.argv) < 2 then
       failwith "Il manque le nom du fichier!";
     sdl_init ();
-    let img = Sdlloader.load_image Sys.argv.(1) in
-    let (w,h) = Image_helper.get_dims img in
-    let tem = Sdlvideo.create_RGB_surface_format img [] w h in
-    let dst = Sdlvideo.create_RGB_surface_format img [] w h in
+    let img = ref (Sdlloader.load_image Sys.argv.(1)) in
+    let (w,h) = Image_helper.get_dims !img in
+    let tem = Sdlvideo.create_RGB_surface_format !img [] w h in
     let display = Sdlvideo.set_video_mode w h [`DOUBLEBUF] in
-		Pre_treatment.image_to_grey img tem;
-		Image_helper.show tem display;
-		wait_key ();
-		exit 0
+        Histo.display_histo !img;
+	Image_helper.show !img display;
+	wait_key ();
+	exit 0
   end
   
 let _ = main ()
