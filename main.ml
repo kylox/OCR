@@ -21,7 +21,8 @@ let main () =
     let (w,h) = Image_helper.get_dims !img in
     let tem = Sdlvideo.create_RGB_surface_format !img [] w h in
     let display = Sdlvideo.set_video_mode w h [`DOUBLEBUF] in
-        Histo.display_histo !img;
+        Binarize.binarize !img;
+        Median.median !img;
 	Image_helper.show !img display;
 	wait_key ();
 	exit 0
