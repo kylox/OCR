@@ -17,13 +17,13 @@ let main () =
     sdl_init ();
     let img = ref (Sdlloader.load_image Sys.argv.(1)) in
     let (w,h) = Image_helper.get_dims !img in
-    let tem = Sdlvideo.create_RGB_surface_format !img [] w h in
+    let tem = ref (Sdlvideo.create_RGB_surface_format !img [] w h) in
     let display = Sdlvideo.set_video_mode w h [`DOUBLEBUF] in
-        Binarize.binarize !img;
-        Median.median !img;
-	Image_helper.show !img display;
-	wait_key ();
-	exit 0
+     Binarize.binarize !img;
+     Median.median !img;
+     Image_helper.show !img display;
+     wait_key ();
+     exit 0
   end
   
 let _ = main ()
