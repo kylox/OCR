@@ -1,5 +1,3 @@
- let level (r, g, b) =  int_of_float(0.299 *. float r     +. 0.587 *. float g +. 0.114 *. float b)
-
 let rec split =  function
   |[] -> ([],[])
   |[a] -> ([a],[])
