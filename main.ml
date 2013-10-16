@@ -20,8 +20,8 @@ let main () =
     let display = Sdlvideo.set_video_mode w h [`DOUBLEBUF] in
     let dst = ref (Sdlvideo.create_RGB_surface_format img [] w h) in
     To_grey.image_to_grey img !dst;
-    Median.median img !dst;
     Binarize.binarize !dst;
+    Median.median !dst;
    (* XYcut.extract_line !dst;*)
     Image_helper.show !dst display;
     wait_key ();
