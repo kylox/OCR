@@ -19,7 +19,6 @@ let otsu img =
   let p = Array.make 256 0. in
     for i = 0 to 255 do 
       p.(i) <- float(hi.(i)) /. (float w *. float h);
-      
     done;
     let seuil_1 = ref 0. in
     let seuil_2 = ref 0. in 
@@ -41,7 +40,7 @@ let otsu img =
            t_2 := i
          end
      done;
-     (!t_2 + !t_1)*8/7
+     (!t_2 + !t_1)*8/5
 
 let binarize img =
  let h = Histo.get_histogram img in

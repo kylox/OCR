@@ -22,7 +22,7 @@ let main () =
     To_grey.image_to_grey img !dst;
     Binarize.binarize !dst;
     Median.median !dst;
-   (* XYcut.extract_line !dst;*)
+    XYcut.display_XYcut !dst;
     Image_helper.show !dst display;
     wait_key ();
     exit 0
