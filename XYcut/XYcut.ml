@@ -11,10 +11,10 @@ let get_Y img y =
   let nb = ref 0 in 
   let (w,h) = Image_helper.get_dims img in
     for i= 0 to h - 1 do
-nb := !nb + To_grey.get_r(Sdlvideo.get_pixel_color img y i);
+      nb := !nb + To_grey.get_r(Sdlvideo.get_pixel_color img y i);
     done;
-nb := !nb / (h - 1);
-!nb
+  nb := !nb / (h - 1);
+  !nb
 (*
 let extract_line img =
   let (w,h) = Image_helper.get_dims img in
