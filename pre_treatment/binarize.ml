@@ -1,4 +1,4 @@
- (*let var k h  = 
+let var k h  = 
   let v = ref 0. in
   for i = 0 to k do
     v := !v +. h.(i) *. float i
@@ -54,8 +54,8 @@ let binarize img =
        else
         Sdlvideo.put_pixel_color img i j (255,255,255)
       done;
-     done; *)
-let binarize greypict =
+     done; 
+(*let binarize greypict =
 	let(w,h) = Image_helper.get_dims greypict in
 	  for y=0 to h-1 do
 	     for x=0 to w-1 do
@@ -67,4 +67,4 @@ let binarize greypict =
               done;
            done;
 
-                
+ *)              

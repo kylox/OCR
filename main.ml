@@ -21,7 +21,7 @@ let main () =
     let display = Sdlvideo.set_video_mode w h [`DOUBLEBUF] in
     let dst = ref (Sdlvideo.create_RGB_surface_format img [] w h) in
     To_grey.image_to_grey img !dst;
-    (*Binarize.binarize !dst;*)
+    Binarize.binarize !dst;
     Median.median !dst; 
     XYcut.display_XYcut !dst;
     let im2mat = Rotation.img2matrice !dst in
