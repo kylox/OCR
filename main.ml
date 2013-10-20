@@ -12,7 +12,8 @@ let rec wait_key () =
       
 let main () =
   begin
-    if Array.length (Sys.argv) < 2 then
+    
+	if Array.length (Sys.argv) < 2 then
       failwith "Il manque le nom du fichier!";
     sdl_init ();
     let img = Sdlloader.load_image Sys.argv.(1) in
@@ -20,10 +21,13 @@ let main () =
     let display = Sdlvideo.set_video_mode w h [`DOUBLEBUF] in
     let dst = ref (Sdlvideo.create_RGB_surface_format img [] w h) in
     To_grey.image_to_grey img !dst;
-    Binarize.binarize !dst;
-    Median.median !dst;
+    (*Binarize.binarize !dst;*)
+    Median.median !dst; 
     XYcut.display_XYcut !dst;
-    Image_helper.show !dst display;
+    let im2mat = Rotation.img2matrice !dst in
+    	let angle = Rotation.hough im2mat in
+		Pre_treatment.rot !dst 1.5;
+    		Image_helper.show !dst display;
     wait_key ();
     exit 0
   end
