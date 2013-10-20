@@ -11,7 +11,6 @@ let moy k h =
       m:= !m +.  h.(i)
     done;
     (!m)
- 
 
 let otsu img = 
   let (w,h) = Image_helper.get_dims img in
@@ -43,16 +42,21 @@ let otsu img =
      (!t_2 + !t_1)*8/5
 
 let binarize img =
- let h = Histo.get_histogram img in
  let moy = otsu img in
  let (w,h) = Image_helper.get_dims img in
    for i = 0 to w-1 do
      for j =0 to h-1 do
      (*  print_int(moy); *)
-       if To_grey.get_r(Sdlvideo.get_pixel_color img i j) <= moy then
-        Sdlvideo.put_pixel_color img i j (0,0,0)
+       print_int(To_grey.get_g(Sdlvideo.get_pixel_color img i j));
+       print_string(" ");
+       if To_grey.get_g(Sdlvideo.get_pixel_color img i j) <= moy then
+         begin
+        Sdlvideo.put_pixel_color img i j (0,0,0);
+         end
        else
-        Sdlvideo.put_pixel_color img i j (255,255,255)
+         begin
+        Sdlvideo.put_pixel_color img i j (255,255,255);
+         end
       done;
      done; 
 (*let binarize greypict =
