@@ -27,15 +27,6 @@ let main () =
     wait_key ();
 
     Binarize.binarize !dst;
-<<<<<<< HEAD
-    (*Median.median !dst; 
-    XYcut.display_XYcut !dst;
-    let im2mat = Rotation.img2matrice !dst in
-    	let angle = Rotation.hough im2mat in
-		Pre_treatment.rot !dst 1.5;*)
-                Sdlvideo.save_BMP !dst "dst";
-    		Image_helper.show !dst display;
-=======
     Image_helper.show !dst display;
     Printf.printf "binarize\n";
     wait_key ();
@@ -55,7 +46,6 @@ let main () =
     XYcut.display_XYcut !dst;
 	  Image_helper.show !dst display;
     Printf.printf "xycut\n";
->>>>>>> df7a04edffbad23ea5badd87a90c0e990afceda1
     wait_key ();
 
     exit 0
