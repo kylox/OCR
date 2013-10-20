@@ -20,15 +20,34 @@ let main () =
     let (w,h) = Image_helper.get_dims img in
     let display = Sdlvideo.set_video_mode w h [`DOUBLEBUF] in
     let dst = ref (Sdlvideo.create_RGB_surface_format img [] w h) in
+
     To_grey.image_to_grey img !dst;
+    Image_helper.show !dst display;
+    Printf.printf "image_to_grey\n";
+    wait_key ();
+
     Binarize.binarize !dst;
+    Image_helper.show !dst display;
+    Printf.printf "binarize\n";
+    wait_key ();
+
     Median.median !dst; 
-    XYcut.display_XYcut !dst;
+    Image_helper.show !dst display;
+    Printf.printf "median\n";
+    wait_key ();
+
     let im2mat = Rotation.img2matrice !dst in
     	let angle = Rotation.hough im2mat in
-		Pre_treatment.rot !dst 1.5;
-    		Image_helper.show !dst display;
+		      dst := Pre_treatment.rot !dst 0.02;
+          Image_helper.show !dst display;
+          Printf.printf "rot\n";
+          wait_key ();
+
+    XYcut.display_XYcut !dst;
+	  Image_helper.show !dst display;
+    Printf.printf "xycut\n";
     wait_key ();
+
     exit 0
   end
   
