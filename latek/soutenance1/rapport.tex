@@ -164,12 +164,15 @@ done
 \end{figure}
 \subsection{La rotation}
 La rotation est effectue grace a une matrice de rotation. La methode consiste a assosicie chaque pixel (i, j) a une matrice [|[|i|]; [|j|]|] puis d'utilliser la formule suivate :
-\\ 
+\\
 $A_{i,j}R_{\theta} = A'_{i,j}$ avec R = [|[|cos \theta; -sin \theta|]; [|sin \theta; cos \theta|]|] 
 \\
 Le resultat sera alors de la forme [|[|i'|]; [|j'|]|], il faut alors creer une image d'une (diag, diag) avec diag la diagonal de l'image source, puis assigne la couleur du pixel (i, j) au pixel (i', j').
 
 \subsection{Decoupage de l'image}
+Le decoupage de l'image s'effectue en deux etapes, la premiere est de creer deux histogrammes, l'un representant le nombre de pixel noir sur sur chaque colonne et l'autre sur chaque ligne. Puis nous allons analyser chaque histogramme separement, l'histogramme va etre parcouru, et si le contenu est plus eleve qu'un certain seuil, la case sera considerer comme du texte, des premiers blocks vont donc etre forme, une fois ces blocks formees l'algorithme est reappele mais cette fois avec le deuxieme histogramme ce qui a pour effet de redecouper les blocks et d'enlever de plus en plus de parties blanches. Le processus est appele recursivement jusqu'a ce que les blocks aient la taille d'un charactere.
+
+
 \subsection{Perceptron}
 Un perceptron est compose dune liste de poids, grace a un certain nombre d'entre et a une fonction dite a seuil, il va fournir une sortie grace a la formule suivante:
 \\
@@ -185,7 +188,7 @@ $poid = poid + entree*(sortieVoulu - sortieReel)$.
 
 
 \subsection{Réseau de neurone}
-Un neurone est tres semblant a un perceptron, au fait pret que sa sortie n'est pas binaire: il n'utilise pas une fonction a seuil mais une fonction sigmoide de la forme: 
+Un neurone est tres semblant a un perceptron, au fait pret que sa sortie n'est pas binaire: il n'utilise pas une fonction a seuil mais une fonction sigmoide de la forme:
 \\
 $f(x) = 1 / 1 + \exp ^{k.-x}$
 \\
