@@ -12,7 +12,7 @@ let rec wait_key () =
 
 let main () =
     begin
-      if Array.length (Sys.argv) < 2 then
+      if Array.length (Sys.argv) < 3 then
         failwith "Il manque le nom du fichier!";
 
       sdl_init ();
@@ -66,16 +66,31 @@ let main () =
                           Binarize.binarize !dst;
                           Image_helper.show !dst display;
                           Printf.printf "binarize\n";
-                          let im2mat = Rotation.img2matrice !dst in
-                          let angle = Rotation.hough im2mat in
-                          dst := Pre_treatment.rot !dst angle;
-                          Image_helper.show !dst display;
                           Printf.printf "rot\n";
-                          Xy_cut.test_blocks !dst;
+                          Xy_cut.test_blocks !dst (if (Array.length Sys.argv > 3) then int_of_string (Sys.argv).(3) else 6);
                           Image_helper.show !dst display;
                           Printf.printf "xycut\n";
                           wait_key (); 
-                        end;
+                        end
+                        else
+                          if(Sys.argv).(1) = "-rx" then
+                            begin 
+                              To_grey.image_to_grey img !dst;
+                              Image_helper.show !dst display;
+                              Printf.printf "image_to_grey\n";
+                              Binarize.binarize !dst;
+                              Image_helper.show !dst display;
+                              Printf.printf "binarize\n";
+                              let im2mat = Rotation.img2matrice !dst in
+                              let angle = Rotation.hough im2mat in
+                              dst := Pre_treatment.rot !dst angle;
+                              Image_helper.show !dst display;
+                              Printf.printf "rot\n";
+                              Xy_cut.test_blocks !dst (if (Array.length Sys.argv > 3) then int_of_string (Sys.argv).(3) else 6);
+                              Image_helper.show !dst display;
+                              Printf.printf "xycut\n";
+                              wait_key (); 
+                            end;
         (* 
          (*
           Median.median img !dst; 
@@ -104,7 +119,8 @@ let main () =
           Image_helper.show !dst display;
           Printf.printf "xycut\n";
           wait_key ();*)*)
-        Sdlvideo.save_BMP !dst "dst";
+        if (Array.length Sys.argv > 3 && String.length (Sys.argv).(Array.length Sys.argv - 1) > 1) then
+            Sdlvideo.save_BMP !dst ((Sys.argv).(Array.length Sys.argv - 1));
         exit 0
     end
 

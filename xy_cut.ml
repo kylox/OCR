@@ -40,7 +40,6 @@ let add_block a b init step seuil vert blocks =
 	!i - 1
 
 let get_block a block step vert =
-	Printf.printf "get_block\n";
 	let blocks = ref [] in
 	let seuil = (if vert then block.w - 1 else block.h - 1)(*a.(Histo.histogram_median a) * 120 / 100*) in
 	Printf.printf "seuil: %d\n" seuil;
@@ -51,7 +50,7 @@ let get_block a block step vert =
 		 	i := add_block a block !i step seuil vert blocks;
 		incr i
 	done;
-	Printf.printf "nbblocks: %d\n" (List.length !blocks);
+	(*Printf.printf "nbblocks: %d\n" (List.length !blocks);*)
 	Array.of_list !blocks
 
 let draw_blocks img blocks =
@@ -93,9 +92,8 @@ let rec xy_cut_rec =
 	 				xy_cut_rec img blocks.(i) (Array.sub steps 1 (Array.length steps - 1)) (n - 1) (not v);
 	 			done
 
-let test_blocks img = 
+let test_blocks img n = 
  	let (width,height) = Image_helper.get_dims img in 
- 		xy_cut_rec img { x = 0; y = 0; w = width; h = height } [|10; 10;
-                3; 4; 30; 1; 10|] 6 true
+ 		xy_cut_rec img { x = 0; y = 0; w = width; h = height } [|10; 15; 1; 4; 30; 1; 10|] n true
  		(*xy_cut_rec img { x = 18; y = 719; w = 300; h = 15 } [|1; 4; 2; 1|] 0 false; *)
  																(* pas      nb_iter  true:vert*)

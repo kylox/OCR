@@ -43,4 +43,22 @@ let rot img angle =
  	done
  	done;
   dst
+
+  let rot2 img angle =
+  let (w,h) = Image_helper.get_dims img in
+  let diag = sqrt (float (w * w + h * h)) in
+  let dst = Sdlvideo.create_RGB_surface_format img [] (int_of_float diag) (int_of_float diag) in init dst;
+    (*Printf.printf "\nw:%d h:%d diag:%d\n" w h diag;*)
+  let (cx, cy) = (diag /. 2., diag /. 2.) in
+  for x = 0 to int_of_float diag-1 do
+  for y = 0 to int_of_float diag-1 do
+      let (posx, posy) = (cos angle *. (float x -. cx) +. sin angle *. (float y -. cy), cos angle *. (float x -.cx) -. sin angle *. (float y -. cy) ) in
+          if posx < float w && posy < float h && posx >= 0. && posy >= 0. then
+            let color = Sdlvideo.get_pixel_color img (int_of_float (posx +. cx)) (int_of_float (posy +. cy)) in
+              Sdlvideo.put_pixel_color dst
+                x y color
+          else ()(*Printf.printf "segfault: %d %d\n" posx posy*)
+  done
+  done;
+  dst
  		
