@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[12pt]{article}
 \usepackage[french]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -21,11 +21,12 @@
 
 \begin{document}
 \maketitle
+\newpage
 \tableofcontents
 \newpage
 \section{Introduction}
 \addcontentsline{toc}{section}{Introduction}
-Dans le cadre de notre specialisation en informatique a l'EPITA, nous avons eu comme projet smestrielle la realisation d'un ocr ( Optical Character Recognition). Ce projet ce deroule sur 4 mois en Ocaml, un langage develloper par l'INRIA. Nous presentons donc dans ce rapport l'etat d'avancement du projet a la vielle de la premiere soutenance. Ce projet a ete realise par quattre membre fidele et devoue a la bonne cause celle de notre ocr ! 
+Dans le cadre de notre spécialisation en informatique à l'EPITA, nous avons eu comme projet semestrielle la realisation d'un ocr ( Optical Character Recognition). Ce projet ce déroule sur 4 mois en Ocaml, un langage devellopé par l'INRIA. Nous présentons donc dans ce rapport l'état d'avancement du projet à la vielle de la premiere soutenance. Ce projet a été réalise par quatre membres fideles et dévoués à la bonne cause celle de notre ocr ! 
 \subsection{presentation des membres}
 \subsubsection{Louis "\textit{Zab}" Forget}
 J'ai toujours etais tres curieux, au point de partir souvent dans tous les sens. J'ai toujours voulu savoir comment marchent les pages webs. C'est dans cette optique que j'ai appris a faire du HTML et CSS en troisieme. J'ai ensuite voulu savoir comment marchent les jeux videos, puis divers programmes. Il y a quelques jours je me suis demandais commemt marchent les gps qui indiquent la densite du traffic.
@@ -37,8 +38,7 @@ Je me suis intéressé à l'informatique à l’âge de 15 ans.
 C'est pendant cette année de seconde que, en fouillant sur ma calculatrice, j'ai découvert l'univers fantastique de la programmation.
 Cela m'a rapidement mené sur la voix du java ou je faisais mes premiers pas dans le monde de la programmation oriente objet.
 \subsubsection{Maxime "\textit{kylox}" Gaudron}
-J'ai toujours vecu dans un monde plus ou moin informatiser. Adepte de tout les petits appareil electronique et mecanique. A tel point que je demontais tout et que plus rien ne marchait ! Je me suis donc mis naturellement a aller chercher un peu plus loin dans le fonctionnent interne des appareils. L'ocr est donc pour moi un grand apprentissage et une decouverte qui permet d'envisager differente possibilite de reconnaissane et de systemes automatiser ! 
-\subsection{organisation du projet}
+J'ai toujours vécu dans un monde plus ou moin informatisé. Adepte de tout les petits appareils electroniques et mecaniques. A tel point que je démontais tout et que plus rien ne marchait ! Je me suis donc mis naturellement à aller chercher un peu plus loin dans le fonctionement interne des appareils. L'ocr est donc pour moi un grand apprentissage et une decouverte qui permet d'envisager differente possibilite de reconnaissance et de systemes automatisé ! 
 \newpage
 \section{Les taches}
 \subsection{quelque mots sur le site internet}
@@ -76,19 +76,19 @@ savoir où placer les éléments et à déterminer leurs actions dans l’interf
 Ces éléments constituent le coeur graphique de l’interface. Il existe différents types de widgets, ceux destinés à afficher quelque chose comme une image ou du texte, ceux censés déterminer une action immédiate tels les boutons (contenant généralement une icône) et ceux contenant d’autres widgets à actions
 immédiates tels que les barres d’outils.
 
-
+\newpage
 
 \subsection{Traitement d'image}
 \subsubsection{Le niveau de gris}
 \subsubsubsection{\textbf{Le concept}}:\\
-Une image se compose d'element appeler pixel et definie par trois composante (en realite quattres mais ceci est une autre histoire) qui sont R,G et B correspondant au valeur Red, Green et Blue d'un pixel. Cette etape est primordiale car elle va permettre le bon traitement de l'image par l'ensemble des etapes aui la succede.\\
+Une image se compose d'élément appelé pixel et definie par trois composante (en realite quattres mais ceci est une autre histoire) qui sont R,G et B correspondant au valeur Red, Green et Blue d'un pixel. Cette etape est primordiale car elle va permettre le bon traitement de l'image par l'ensemble des étapes aui la succède.\\
 \subsubsubsection{\textbf{La realisation}}:\\
-Pour realiser ce niveau de gris on va travailler sur le trois composante d'un pixel et appliquer la fromule suivante :
+Pour réaliser ce niveau de gris on va travailler sur les trois composantes d'un pixel et appliquer la fromule suivante :
 \\
 \begin{center}
 \[x = \frac{0.299 \times R + 0.587 \times G + 0.114 \times B}{3}\]
 \end{center}
-a l'ensemble des pixels de l'image. Le niveau de gris est operationel dans notre ocr, nous pouvons donc passer a la tache suivante.
+à l'ensemble des pixels de l'image. Le niveau de gris est operationel dans notre ocr, nous pouvons donc passer à la tache suivante.
 \begin{figure}[h]
 \includegraphics[width=0.50\textwidth]{img/grey.png}
 \includegraphics[width=0.50\textwidth]{img/lena.jpg}
@@ -97,7 +97,7 @@ a l'ensemble des pixels de l'image. Le niveau de gris est operationel dans notre
 \newpage{}
 \subsubsection{Le filtre median}
 \textbf{Le concept}:\\
-Le filtre median va pour chaque pixels de l'image recupere le triplet (R,G,B) de chaque pixel autour du pixel traite et trier ces pixels par ordre croissant. Il suffit juste de recuperer la valeur mediane de la liste trier. Le passe dans cette algo et qyue l'on doit passer les pixels sur une autre image pour pas fausser les calculs sur la premiere image !
+Le filtre median va pour chaque pixels de l'image recuperer le triplet (R,G,B) de chaque pixel autour du pixel traitré et trier ces pixels par ordre croissant. Il suffit juste de recuperer la valeur mediane de la liste trier. Le passe dans cette algo et qyue l'on doit passer les pixels sur une autre image pour pas fausser les calculs sur la premiere image !
 \vspace{0.8cm}
 \textbf{La realisation}:\\
 En pratique ce filtre ne s'applique pas sur toute les images car sinon elle floute l'image et la rend intraitable. Je suis actuellement en recherche d'un algorithme permettant de palier ce gros probleme. Au niveau aulgoritemiaue on obtiens
@@ -138,13 +138,22 @@ return m
 \\Le tout est injecter dans la formule
 
 \[ s = v(i,p) \times (1 - v(i,p) \times (p.(255)) \times v(i,p) - m(i,p))^{2}\]
- 
+La methode de binarisation est plutot au point nous obtenons de tres bon resultats !
+\begin{figure}[h]
+  \includegraphics[width=0.50\textwidth]{img/bin.png}
+  \includegraphics[width=0.50\textwidth]{img/bin2.png}
+  \caption{exemple de binarisation}
+\end{figure}
+Nous pouvons donc passer à la rotation !
+\newpage
+\subsection{la rotation d'image}
 \subsubsection{Détection d'angle}
 Je me suis donc occupe de la transformation de Hough. La transforme de hough est une techmiaue de reconnaissance de formes invente en 1962 par Paul Hough.
 Le principe qui sous-tend la transforme de Hough est qu'il existe un nombre infini de ligne passant par un point dont la seule difference est l'orientation (l'angle). La transforme generalise de Houg fonctionne sur le principe qu'une droite peux s'ecrire sous la forme 
 \[r = x\cos{\theta}+y\sin{\theta}\]
 A chaque pixels noir on essaye de trouver la vlauer maximum de r. Cette valeur represente la droite qui alligne le plus de pixel noir. On la retiens et on vote dans un tableau pour son angle associer. On recommence sur tout les pixels. L'angle qui a recu le plus de vote estl'anlge de rotation de l'image( minore de la moitier de l'intervalle pour pouvoir faire ressortir les angles negatifs).
 \\
+\newpage
 Voici le principe de l'algo en pseudo code :
 \begin{lstlisting}
 for y =0 to hauteur de l'image do
@@ -164,25 +173,26 @@ done
 
 \end{lstlisting} 
 
-\begin{figure}[hp]
+\begin{figure}[h]
 \centering
 \includegraphics[width=0.80\textwidth]{img/hough.png}
 \end{figure}
+\newpage
 \subsection{La rotation}
 La rotation est effectue grace a une matrice de rotation. La methode consiste a assosicie chaque pixel (i, j) a une matrice [|[|i|]; [|j|]|] puis d'utilliser la formule suivate :
 \\
-$A_{i,j}R_{\theta} = A'_{i,j}$ avec R = [|[|cos \theta; -sin \theta|]; [|sin \theta; cos \theta|]|] 
+\[A_{i,j}R_{\theta} = A'_{i,j} avec R = [|[|cos \theta; -sin \theta|]; [|sin \theta; cos \theta|]|] \]
 \\
 Le resultat sera alors de la forme [|[|i'|]; [|j'|]|], il faut alors creer une image d'une (diag, diag) avec diag la diagonal de l'image source, puis assigne la couleur du pixel (i, j) au pixel (i', j').
-
 \subsection{Decoupage de l'image}
 Le decoupage de l'image s'effectue en deux etapes, la premiere est de creer deux histogrammes, l'un representant le nombre de pixel noir sur sur chaque colonne et l'autre sur chaque ligne. Puis nous allons analyser chaque histogramme separement, l'histogramme va etre parcouru, et si le contenu est plus eleve qu'un certain seuil, la case sera considerer comme du texte, des premiers blocks vont donc etre forme, une fois ces blocks formees l'algorithme est reappele mais cette fois avec le deuxieme histogramme ce qui a pour effet de redecouper les blocks et d'enlever de plus en plus de parties blanches. Le processus est appele recursivement jusqu'a ce que les blocks aient la taille d'un charactere.
-
-
+\newpage
 \subsection{Perceptron}
 Un perceptron est compose dune liste de poids, grace a un certain nombre d'entre et a une fonction dite a seuil, il va fournir une sortie grace a la formule suivante:
 \\
+\begin{center}
 $\sigma entree_{i}.poids_{i} > seuil$
+\end{center}
 \\
  La sortie sera 1 si l'equation est verifie, 0 sinon. Par exemple un perceptron qui peut analyser une porte OU repondra a l'entree (0, 1) par 1.
 \\
@@ -192,15 +202,30 @@ $poid = poid + entree*(sortieVoulu - sortieReel)$.
 \\
  Ces tests sont effectues jusqu'a ce que toutes les sorties soient bonnes: le perceptron a alors appris.
 
-
 \subsection{Réseau de neurone}
 Un neurone est tres semblant a un perceptron, au fait pret que sa sortie n'est pas binaire: il n'utilise pas une fonction a seuil mais une fonction sigmoide de la forme:
 \\
-$f(x) = 1 / 1 + \exp ^{k.-x}$
+\begin{center}
+$f(x) = \frac{1}{ 1 + \exp ^{k.-x}}$
+\end{center}
 \\
 Un reseau de neurone est compose de n couche de neurone, une couche de neurone est compose de m neurone, chaque neurone est relie avec tout les neurones de la couche precedente. Un reseau de neurone prend une liste d'entree et va fournir une liste de sortie.
-
+\newpage
 \section{Conclusion}
-
+Et c'est ainsi que petit a petit notre ocr avance pas a pas nous pensons ne pas etre en retard et avoir meme de l'avance ! 
+nous devions faire pour cette soutenance :
+\begin{itemize}
+  \item Chargement et pre-traitement:
+    \begin{itemize}
+      \item passage au niveau de gris : FAIT !
+      \item les filtres : Nous avons fait le filtre median. Nous pensons implementer un filtre de meilleur qualité que le filtre median nos recherche se tournerons donc vers le filtre moyenneur et le flou gaussien certainement
+      \item binarisation : l'algorithme de binarisation semble plutot performant mais je pense que nous reverrons sont implementation qui n'est pas forcement super bien faite
+    \end{itemize}
+  \item Rotation OK mais nous reverrons l'algorithme pour plus de precision et de rapidite !
+  \item detection de zone de texte. Nous avons un XYcut fonctionnel mais nous tendons a implementer un diagrame de voronoi ou une segmentation de Docstrum si la diffisulté est surmontable
+  \item Le reseau de neurone est sur de bon rail
+    \end{itemize}
+    Nous pensons donc avoir rempli une bonne part du marché ! après de long effort nous nous retrouverons lors de la soutenance finale ! 
+\end{itemize}
 
 \end{document}
