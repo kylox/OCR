@@ -47,8 +47,8 @@ let binarize img =
    for i = 0 to w-1 do
      for j =0 to h-1 do
      (*  print_int(moy); *)
-       print_int(To_grey.get_g(Sdlvideo.get_pixel_color img i j));
-       print_string(" ");
+       (*print_int(To_grey.get_g(Sdlvideo.get_pixel_color img i j));
+       print_string(" ");*)
        if To_grey.get_g(Sdlvideo.get_pixel_color img i j) <= moy then
          begin
         Sdlvideo.put_pixel_color img i j (0,0,0);
