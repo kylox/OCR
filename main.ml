@@ -21,7 +21,7 @@ let main () =
             let dst = ref (Sdlvideo.create_RGB_surface_format img [] w h) in
 
             To_grey.image_to_grey img !dst;
-            Image_helper.show !dst display;
+            (*Image_helper.show !dst display;*)
             Printf.printf "image_to_grey\n";
             wait_key ();
 (*
