@@ -34,6 +34,7 @@ let main () =
     Median.median !dst; 
     Image_helper.show !dst display;
     Printf.printf "median\n";
+    Sdlvideo.save_BMP !dst "dst";
     wait_key ();
 
     let im2mat = Rotation.img2matrice !dst in
