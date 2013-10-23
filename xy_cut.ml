@@ -22,6 +22,7 @@ let get_histo img b =
 let add_block a b init step seuil vert blocks =
 	let nb_blanc = ref 0 in
 	let i = ref init in
+	(*Printf.printf "add_blocks test: %d %d %d %d %d\n" b.x b.y b.w b.h init;*)
 	while !i < Array.length a && !nb_blanc < step do
 		if a.(!i) >= seuil then
 			incr nb_blanc
@@ -29,18 +30,19 @@ let add_block a b init step seuil vert blocks =
 			nb_blanc := 0;
 		incr i
 	done;
-	let block =		
-		if vert then
-		 	{ x = b.x; y = b.y + init; w = b.w; h = !i - init - !nb_blanc - 1 }
-		else
-			{ x = b.x + init; y = b.y; w = b.x + !i - init - !nb_blanc - 1; h = b.h } in
-			blocks := block::(!blocks);
-	!i - !nb_blanc
+		let block =
+				if vert then
+				 	{ x = b.x; y = b.y + init - 1; w = b.w; h = !i - init - !nb_blanc + 1 }
+				else
+					{ x = b.x + init - 1; y = b.y; w = !i - init - !nb_blanc + 1; h = b.h } in
+					if block.w > 2 && block.h > 2 then 
+						blocks := block::(!blocks);
+	!i - 1
 
 let get_block a block step vert =
 	Printf.printf "get_block\n";
 	let blocks = ref [] in
-	let seuil = (if vert then block.w - 3 else block.h - 10)(*a.(Histo.histogram_median a) * 120 / 100*) in
+	let seuil = (if vert then block.w - 1 else block.h - 1)(*a.(Histo.histogram_median a) * 120 / 100*) in
 	Printf.printf "seuil: %d\n" seuil;
 	let i = ref 0 in
 	while !i < Array.length a do
@@ -54,6 +56,7 @@ let get_block a block step vert =
 
 let draw_blocks img blocks =
 	for j = 0 to Array.length blocks - 1 do
+		(*Printf.printf "block: %d %d %d %d\n" blocks.(j).x blocks.(j).y blocks.(j).w blocks.(j).h;*)
 		for i = blocks.(j).x to blocks.(j).x + blocks.(j).w do
 			Sdlvideo.put_pixel_color img i blocks.(j).y (255, 0, 0);
 			Sdlvideo.put_pixel_color img i (blocks.(j).y + blocks.(j).h) (255, 0, 0)
@@ -92,5 +95,6 @@ let rec xy_cut_rec =
 
 let test_blocks img = 
  	let (width,height) = Image_helper.get_dims img in 
- 		xy_cut_rec img { x = 0; y = 0; w = width; h = height } [|10; 4; 2; 20|] 2 true
+ 		xy_cut_rec img { x = 0; y = 0; w = width; h = height } [|10; 10; 3; 4; 30; 1; 10|] 4 true
+ 		(*xy_cut_rec img { x = 18; y = 719; w = 300; h = 15 } [|1; 4; 2; 1|] 0 false; *)
  																(* pas      nb_iter  true:vert*)
