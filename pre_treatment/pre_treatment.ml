@@ -35,7 +35,7 @@ let rot img angle =
     if color != (255,255,255) then
 		let pos = matrix_mult rot_matrix
 			 [|[|float x -. cx|]; [|float y -. cy|]|] in
-        let (posx, posy) = (int_of_float ((pos.(0).(0) +. cx)), int_of_float ((pos.(1).(0) +. cy))) in
+        let (posx, posy) = (int_of_float ((pos.(0).(0) +. cx +. 1.)), int_of_float ((pos.(1).(0) +. cy +. 1.))) in
           if posx < diag && posy < diag && posx >= 0 && posy >= 0 then
 	 	         Sdlvideo.put_pixel_color dst
 			         posx posy color

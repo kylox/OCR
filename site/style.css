@@ -1,0 +1,209 @@
+body {
+	margin-left: 0px;
+	margin-top: 50px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	font-size: 1em;
+	color: #006;
+	font-family:"Times New Roman", Times, serif;
+	background-image: url("images/oeuil.jpg");
+	background-repeat: no-repeat;
+}
+
+h1 {
+	margin-left: 0px;
+	margin-top: 30px;
+	margin-right: 0px;
+	margin-bottom: 5px;
+}
+
+h2 {
+	margin-left: 0px;
+	margin-top: 5px;
+	margin-right: 0px;
+	margin-bottom: 5px;
+}
+
+h3 {
+	margin-left: 0px;
+	margin-top: 15px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+
+ul, li {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+
+ul {
+	padding-left:25px;
+}
+
+p {
+	margin-left: 0px;
+	margin-top: 5px;
+	margin-right: 0px;
+	margin-bottom: 5px;
+}
+
+.menu
+{	
+	margin-right : -10px;
+	border: 1px blue solid;
+	border-radius: 10px;
+	box-shadow: box-shadow: 6px 6px 6px black;
+}
+
+
+
+#menu a, a:visited {
+
+	color:#006699;
+	text-decoration:none;
+}
+
+#menu a:hover {
+	color:#003399;
+	text-decoration:none;
+}
+
+#contents a, a:visited {
+
+	color:#006699;
+	border-bottom:#006699 1px dashed;
+}
+
+#contents a:hover {
+	color:#006699;
+
+}
+
+a, a:visited {
+
+	color:#006699;
+	border-bottom:none;
+	text-decoration:none;
+}
+
+a img {
+	border:none;
+}
+
+#contents a img {
+	border:none;
+}
+
+.center {
+	text-align:center;
+}
+
+.titlenews {
+	font-size:1.2em;
+	font-weight:bold;
+}
+
+.filAriane {
+	color:#999999;
+}
+
+.justify {
+	text-align:justify;
+}
+
+	
+	#top {
+		background-repeat:no-repeat;
+		height:248px;
+
+	}
+	
+	#menu {
+		float:left;
+		padding-left:10px;
+		margin-top:-50px;
+		width:182px;
+		height:40px;
+	
+	}
+	
+	* html	#menu {
+		float:left;
+		padding-left:33px;
+		margin-top:-15px;
+		width:182px;
+		height:40px;
+	
+	}
+	
+	#main { 
+		position: relative;
+		width: 892px;
+		margin-left: auto;
+		margin-right: auto;
+		top:-160px;
+
+
+
+		}
+		
+		#left {
+			position:relative;
+			height:160px;
+			width:50%;
+			background-repeat:repeat-x;
+		}
+		
+		#right {
+			position:absolute;
+			width:100%;
+			height:160px;
+			margin-left:0px;
+			background-repeat:repeat-x;
+		}
+		
+		#page {
+			position:relative;
+			margin-left:-9px;
+			width: 892px;
+			
+			background-repeat:no-repeat;
+			margin-bottom:-160px;
+		}
+
+		#footer {
+			position:relative;
+			background-repeat:repeat-x;
+			height:52px;
+			padding-top:20px;
+			width:100%;
+			text-align:center;
+			margin-top:0px;
+		}
+		
+		#contents {
+			position:relative;
+			left:244px;
+			width:620px;
+			top: -50px; 
+		}
+		
+		*+html #contents {
+			position:relative;
+			left:248px;
+			width:620px;
+			top: -10px; 
+		}
+		
+		* html #contents {
+			position:relative;
+			left:248px;
+			width:620px;
+			top: -400px; 
+		}
+		
+
+
+

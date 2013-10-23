@@ -8,9 +8,9 @@ OCAML=ocamlopt
 OCAMLFLAGS= -I +sdl -I +site-lib/sdl 
 OCAMLLD= bigarray.cmxa sdl.cmxa sdlloader.cmxa
 DIRS= -I other/ -I pre_treatment/ -I post_treatment/ -I XYcut/
-OTH= other/image_helper.ml pre_treatment/to_grey.ml other/histo.ml XYcut/box.ml
+OTH= other/image_helper.ml pre_treatment/to_grey.ml other/histo.ml XYcut/box.ml xy_cut.ml
 PRE= pre_treatment/median.ml pre_treatment/pre_treatment.ml
-BIN=pre_treatment/binarize.ml
+BIN= pre_treatment/binarize.ml
 ROT= pre_treatment/rotation.ml
 SRC= post_treatment/post_treatment.ml XYcut/XYcut.ml main.ml
 
