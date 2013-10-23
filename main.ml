@@ -47,7 +47,6 @@ let main () =
             Printf.printf "rot\n";
             (*wait_key ();*)
 
-
             Xy_cut.test_blocks !dst;
             Image_helper.show !dst display;
             Printf.printf "xycut\n";
