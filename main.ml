@@ -24,22 +24,22 @@ let main () =
             Image_helper.show !dst display;
             Printf.printf "image_to_grey\n";
             (*wait_key ();*)
-
+(*
             Median.median img !dst; 
             Image_helper.show !dst display;
             Printf.printf "median\n";
             (*wait_key ();*)
-
+ *)
             Binarize.binarize !dst;
             Image_helper.show !dst display;
             Printf.printf "binarize\n";
             (*wait_key ();*)
-
+            (*
             Median.median img !dst; 
             Image_helper.show !dst display;
             Printf.printf "median\n";
             (*wait_key ();*)
-
+             
             let im2mat = Rotation.img2matrice !dst in
             let angle = Rotation.hough im2mat in
             dst := Pre_treatment.rot !dst 0.0;
@@ -51,7 +51,7 @@ let main () =
             Xy_cut.test_blocks !dst;
             Image_helper.show !dst display;
             Printf.printf "xycut\n";
-            wait_key ();
+            wait_key ();*)
             Sdlvideo.save_BMP !dst "dst";
             exit 0
     end
