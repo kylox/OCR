@@ -8,6 +8,7 @@ body {
 	font-family:"Times New Roman", Times, serif;
 	background-image: url("images/oeuil.jpg");
 	background-repeat: no-repeat;
+      /*  background :-moz-linear-gradient(top, #f5f6f6 0%,#dbdce2 21%,#b8bac6 49%,#dddfe3 80%,#f5f6f6 100%); */
 }
 
 h1 {
