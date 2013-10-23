@@ -98,7 +98,7 @@ let bmedian = GButton.button
  
  
 let _ =
-  window#connect#destroy ~callback:GMain.quit;
+  ignore(window#connect#destroy ~callback:GMain.quit);
  
  
   window#show ();
