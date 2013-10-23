@@ -8,8 +8,6 @@
 \usepackage{fancyhdr}
 \usepackage{bm}
 \usepackage{listing}
-\graphicspath{img/} 
-\setlst{language=Caml}
 \title{Projet CamlT'OCR par SMK \~Cahier des charges}
 \pagestyle{fancyplain} \lhead{\textit{Projet DotNet}} \rhead{\textit{KMnO4}}
 \date{24-10-2014}
@@ -22,19 +20,24 @@
 
 
 \begin{document}
+\begin{center}
 \maketitle
+\end{center}
+\newpage
 \tableofcontents
+\newpage
 \section{Introduction}
 \addcontentsline{toc}{section}{Introduction}
 Dans le cadre de notre specialisation en informatique a l'EPITA, nous avons eu comme projet smestrielle la realisation d'un ocr ( Optical Character Recognition). Ce projet ce deroule sur 4 mois en Ocaml, un langage develloper par l'INRIA. Nous presentons donc dans ce rapport l'etat d'avancement du projet a la vielle de la premiere soutenance. Ce projet a ete realise par quattre membre fidele et devoue a la bonne cause celle de notre ocr ! 
 \subsection{presentation des membres}
 \subsubsection{Louis "\textit{Zab}" Forget}
-J'ai toujours etais tres curieux, au point de partir souvent dans tous les sens. J'ai toujours voulu savoir comment marchent les pages webs. C'est dans cette optique que j'ai appris a faire du HTML et CSS en troisieme. J'ai ensuite voulu savoir comment marche les jeux videos, puis divers programmes. Il y a quelques jours je me suis demandais commemt maichent les gps aui indiquent la densite du traffic.
+J'ai toujours etais tres curieux, au point de partir souvent dans tous les sens. J'ai toujours voulu savoir comment marchent les pages webs. C'est dans cette optique que j'ai appris a faire du HTML et CSS en troisieme. J'ai ensuite voulu savoir comment marchent les jeux videos, puis divers programmes. Il y a quelques jours je me suis demandais commemt marchent les gps qui indiquent la densite du traffic.
 \subsubsection{Timothe "\textit{Tim-Tim}" Bureau Godart}
 \subsubsection{Leopold "\textit{Meta}" Szabatura}
 \subsubsection{Maxime "\textit{kylox}" Gaudron}
 J'ai toujours vecu dans un monde plus ou moin informatiser. Adepte de tout les petits appareil electronique et mecanique. A tel point que je demontais tout et que plus rien ne marchait ! Je me suis donc mis naturellement a aller chercher un peu plus loin dans le fonctionnent interne des appareils. L'ocr est donc pour moi un grand apprentissage et une decouverte qui permet d'envisager differente possibilite de reconnaissane et de systemes automatiser ! 
 \subsection{organisation du projet}
+\newpage
 \section{Les taches}
 \subsection{quelque mots sur le site internet}
 \subsection{Interface graphique}
@@ -48,11 +51,23 @@ Pour realiser ce niveau de gris on va travailler sur le trois composante d'un pi
 \begin{center}
 \[x = \frac{0.299 \times R + 0.587 \times G + 0.114 \times B}{3}\]
 \end{center}
-a l'ensemble des pixels de l'image.
-
-\end{center}
+a l'ensemble des pixels de l'image. Le niveau de gris est operationel dans notre ocr, nous pouvons donc passer a la tache suivante.
+\begin{figure}[hp]
+\includegraphics[width=0.80\textwidth]{imgr/dst}
+\end{figure}
 \subsubsection{Le filtre median}
+\subsubsubsection{\textbf{Le concept}}:\\
+Le filtre median va pour chaque pixels de l'image recupere le triplet (R,G,B) de chaque pixel autour du pixel traite et trier ces pixels par ordre croissant. Il suffit juste de recuperer la valeur mediane de la liste trier. Le passe dans cette algo et qyue l'on doit passer les pixels sur une autre image pour pas fausser les calculs sur la premiere image !
+\subsubsubsection{\textbf{La realisation}}\\
+En pratique ce filtre ne s'applique pas sur toute les images car sinon elle floute l'image et la rend intraitable. Je suis actuellement en recherche d'un algorithme permettant de palier ce gros probleme. Au niveau aulgoritemiaue on obtiens 
 \subsubsection{La binarisation}
+\subsubsubsection{\textbef{Le concept}}:\\
+Nous utilisons l'algorithme d'Otsu, du nom de son inventeur Nobuyuki Otsu. Qui se base sur l'histogramme d'un image. L'histogramme est un tableau de 255 element, ici des entiers, qui represente le nombre d'occurence d'un niveau de gris ( les niveau de gris allant de 0 (blanc) a 255 (noir). Dans un permier temps va creer un tableau pour y mettre les valeur traiter de l'histogramme de la maniere suivant 
+\begin{center}
+\[ p_{i} = \frac{h_{i}} {width * height}\]
+\end{center}
+qui renvoie la population du niveau de gris i dans l'ensemble des pixels de l'image.
+
 \subsubsection{rotation}
 Je me suis donc occupe de la transformation de Hough. La transforme de hough est une techmiaue de reconnaissance de formes invente en 1962 par Paul Hough.
 Le principe qui sous-tend la transforme de Hough est qu'il existe un nombre infini de ligne passant par un point dont la seule difference est l'orientation (l'angle). La transforme generalise de Houg fonctionne sur le principe qu'une droite peux s'ecrire sous la forme 
