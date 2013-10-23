@@ -80,16 +80,24 @@ A chaque pixels noir on essaye de trouver la vlauer maximum de r. Cette valeur r
 \end{figure}
 
 \subsubsection{Rotation}
-La rotation est effectue grace a une matrice de rotation. La methode consiste a assosicie chaque pixel (i, j) a une matrice [|[|i|]; [|j|]|] puis d'utilliser la formule suivate : $A_{i,j}R_{\theta} = A'_{i,j}$ avec R = [|[|cos \theta; -sin \theta|]; [|sin \theta; cos \theta|]|] 
-Le resulta sera alors de la forme [|[|i'|]; [|j'|]|], il faut alors creer une image d'une (diag, diag) avec diag la diagonal de l'image source, puis assigne la couleur du pixel (i, j) au pixel (i', j').
+La rotation est effectue grace a une matrice de rotation. La methode consiste a assosicie chaque pixel (i, j) a une matrice [|[|i|]; [|j|]|] puis d'utilliser la formule suivate : 
+$A_{i,j}R_{\theta} = A'_{i,j}$ avec R = [|[|cos \theta; -sin \theta|]; [|sin \theta; cos \theta|]|] 
+Le resultat sera alors de la forme [|[|i'|]; [|j'|]|], il faut alors creer une image d'une (diag, diag) avec diag la diagonal de l'image source, puis assigne la couleur du pixel (i, j) au pixel (i', j').
 
 
 \subsection{Decoupage de l'image}
 \subsection{Perceptron}
-Un perceptron est compose dune liste de poids, grace a un certain nombre d'entre et a une fonction dite a seuil, il va fournir une sortie grace a la formule suivante: $\sigma entree_{i}.poids_{i} > seuil$
+Un perceptron est compose dune liste de poids, grace a un certain nombre d'entre et a une fonction dite a seuil, il va fournir une sortie grace a la formule suivante: 
+$\sigma entree_{i}.poids_{i} > seuil$
 La sortie sera 1 si l'equation est verifie, 0 sinon. Par exemple un perceptron qui peut analyser une porte OU repondra a l'entree (0, 1) par 1.
-Une fois le perceptrion structure il faut quil puisse apprendre, cest a dire modifier ses poids pour qu'il donne de bons resultas. Pour ce faire il faut lui passer une batterie de tests avec les resultats escomptes. On va alors evaluer le neurone avec un test et regarder si le resultat est le bon, si ce n'est pas le cas le poid va alors etre corrige selon la formule suivante: $poid = poid + entree*(sortieVoulu - sortieReel)$.
+Une fois le perceptrion structure il faut quil puisse apprendre, cest a dire modifier ses poids pour qu'il donne de bons resultas. Pour ce faire il faut lui passer une batterie de tests avec les resultats escomptes. On va alors evaluer le neurone avec un test et regarder si le resultat est le bon, si ce n'est pas le cas le poid va alors etre corrige selon la formule suivante: 
+$poid = poid + entree*(sortieVoulu - sortieReel)$.
 Ces tests sont effectues jusqu'a ce que toutes les sorties soient bonnes: le perceptron a alors appris.
+
+\subsection{Reseau de neurone}
+Un neurone est tres semblant a un perceptron, au fait pret que sa sortie n'est pas binaire: il n'utilise pas une fonction a seuil mais une fonction sigmoide de la forme: 
+$f(x) = 1 / 1 + \exp ^{k.-x}$
+Un reseau de neurone est compose de n couche de neurone, une couche de neurone est compose de m neurone, chaque neurone est relie avec tout les neurones de la couche precedente. Un reseau de neurone prend une liste d'entree et va fournir une liste de sortie.
 
 \section{Conclusion}
 
