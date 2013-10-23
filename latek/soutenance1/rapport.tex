@@ -86,6 +86,11 @@ Le resulta sera alors de la forme [|[|i'|]; [|j'|]|], il faut alors creer une im
 
 \subsection{Decoupage de l'image}
 \subsection{Perceptron}
+Un perceptron est compose dune liste de poids, grace a un certain nombre d'entre et a une fonction dite a seuil, il va fournir une sortie grace a la formule suivante: $\sigma entree_{i}.poids_{i} > seuil$
+La sortie sera 1 si l'equation est verifie, 0 sinon. Par exemple un perceptron qui peut analyser une porte OU repondra a l'entree (0, 1) par 1.
+Une fois le perceptrion structure il faut quil puisse apprendre, cest a dire modifier ses poids pour qu'il donne de bons resultas. Pour ce faire il faut lui passer une batterie de tests avec les resultats escomptes. On va alors evaluer le neurone avec un test et regarder si le resultat est le bon, si ce n'est pas le cas le poid va alors etre corrige selon la formule suivante: $poid = poid + entree*(sortieVoulu - sortieReel)$.
+Ces tests sont effectues jusqu'a ce que toutes les sorties soient bonnes: le perceptron a alors appris.
+
 \section{Conclusion}
 
 
