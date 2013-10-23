@@ -42,7 +42,36 @@ J'ai toujours vecu dans un monde plus ou moin informatiser. Adepte de tout les p
 \newpage
 \section{Les taches}
 \subsection{quelque mots sur le site internet}
+Pour commencer, vous pouvez trouver notre site web à l'adresse suivante : cmalt-ocr.epiproject.eu.\\
+Pour ce site, nous avons décidé de commencer avec une interface simple, épuré et pas très rechercher pour facilité la navigation. Pour cela, nous n'avons utilisé que du HTML et du CSS. Cependant, nous ne comptons pas en rester la, nous envisageons de le continuer et de l'améliorer au file du temps, ainsi nous pourrons avoir un site beau et esthétique pour la dernière soutenance.\\ 
 \subsection{Interface graphique}
+Ce projet est pour nous le moyen de découvrir les bases et les approffondissements de la programmation d’un OCR, et d’en avoir (dans cette partie) une première approche simple et concrète de l’interface graphique. Pour une première approche, nous avons décidé de vous présenter une interface fonctionnelle, afin de vous donner une vision simpliste d’un OCR achevé. Pour cela, nous avons utilisé la lablGTK, qui est est un éditeur d’interface plutôt intuitif se basant sur un principe simple : pour créer une interface, on commence par créer une fenetre dans laquelle on met des «boites» qui vont contenir ce que l’on appelle des widgets (ou gadgets en français). Ces derniers peuvent servir à diffentes choses, du genre mettre une image ou encore des boutons.\\
+L’interface graphique est un composant important pour notre projet puisqu’elle sera le seul contact qu’aura l’utilisateur avec notre programme. Par conséquent, cette dernière  devra être claire, simple d’utilisation et un minimum attractive pour l’utilisateur.\\
+Cette interface graphique constitue mine de rien un enjeu assez important, étant
+donné que c’est elle qui va permettre à l’utilisateur d’avoir accès à toutes les fonctionnalités. Elle se doit donc d’être intuitive et très simple d’utilisation et, dès son premier abord, l’utilisateur doit se sentir à l’aise avec chaque fonctionnalité pour apprécier le logiciel.
+
+\subsubsection{Les box}
+Ces derniers représentent la logique de Gtk, ce sont les éléments principaux
+de l’interface graphique au niveau de sa conception car ils ne sont pas vraiment
+visible une fois cette dernière terminée. Néanmoins cette logique a ses limites
+car l’imbrication d’éléments les uns dans les autres nécessite beaucoup d’appels
+et de très bien penser son interface avant même de l’avoir commencé.
+Ces éléments primordiaux dans le travail de l’interface se décomposent en
+deux sous-catégories, les hbox et les vbox. Les premières permettent d’empiler
+les éléments de manière horizontale et les secondes servent à les empiler
+de manière verticales. Une troisième catégorie un peu plus spécifique existe, il
+s’agit des Gtktables, ces dernières permettent de créer des box dans un tableau
+dont on peut déterminer la largeur et la hauteur et ainsi de créer une interface
+un peu plus équilibrée.
+Une fois la logique de ces éléments comprise, le travail consiste surtout à
+savoir où placer les éléments et à déterminer leurs actions dans l’interface.
+
+\subsubsection{Les widgets}
+Ces éléments constituent le coeur graphique de l’interface. Il existe différents types de widgets, ceux destinés à afficher quelque chose comme une image ou du texte, ceux censés déterminer une action immédiate tels les boutons (contenant généralement une icône) et ceux contenant d’autres widgets à actions
+immédiates tels que les barres d’outils.
+
+
+
 \subsection{Traitement d'image}
 \subsubsection{Le niveau de gris}
 \subsubsubsection{\textbf{Le concept}}:\\
