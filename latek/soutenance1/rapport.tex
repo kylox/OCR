@@ -52,8 +52,10 @@ Pour realiser ce niveau de gris on va travailler sur le trois composante d'un pi
 \[x = \frac{0.299 \times R + 0.587 \times G + 0.114 \times B}{3}\]
 \end{center}
 a l'ensemble des pixels de l'image. Le niveau de gris est operationel dans notre ocr, nous pouvons donc passer a la tache suivante.
-\begin{figure}[hp]
-\includegraphics[width=0.80\textwidth]{imgr/dst}
+\begin{figure}[h]
+\includegraphics[width=0.50\textwidth]{img/grey.png}
+\includegraphics[width=0.50\textwidth]{img/lena.jpg}
+\caption{avec et sans nuance (captain obvious is obvious)}
 \end{figure}
 \subsubsection{Le filtre median}
 \subsubsubsection{\textbf{Le concept}}:\\
@@ -67,7 +69,6 @@ Nous utilisons l'algorithme d'Otsu, du nom de son inventeur Nobuyuki Otsu. Qui s
 \[ p_{i} = \frac{h_{i}} {width * height}\]
 \end{center}
 qui renvoie la population du niveau de gris i dans l'ensemble des pixels de l'image.
-
 \subsubsection{rotation}
 Je me suis donc occupe de la transformation de Hough. La transforme de hough est une techmiaue de reconnaissance de formes invente en 1962 par Paul Hough.
 Le principe qui sous-tend la transforme de Hough est qu'il existe un nombre infini de ligne passant par un point dont la seule difference est l'orientation (l'angle). La transforme generalise de Houg fonctionne sur le principe qu'une droite peux s'ecrire sous la forme 
