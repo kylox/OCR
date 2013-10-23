@@ -61,15 +61,18 @@ a l'ensemble des pixels de l'image. Le niveau de gris est operationel dans notre
 \end{figure}
 \newpage{}
 \subsubsection{Le filtre median}
-\subsubsubsection{\textbf{Le concept}}:\\
+\textbf{Le concept}:\\
 Le filtre median va pour chaque pixels de l'image recupere le triplet (R,G,B) de chaque pixel autour du pixel traite et trier ces pixels par ordre croissant. Il suffit juste de recuperer la valeur mediane de la liste trier. Le passe dans cette algo et qyue l'on doit passer les pixels sur une autre image pour pas fausser les calculs sur la premiere image !
-\subsubsubsection{\textbf{La realisation}}\\
+\vspace{0.8cm}
+\textbf{La realisation}:\\
 En pratique ce filtre ne s'applique pas sur toute les images car sinon elle floute l'image et la rend intraitable. Je suis actuellement en recherche d'un algorithme permettant de palier ce gros probleme. Au niveau aulgoritemiaue on obtiens
+\vspace{0.8cm}
 \begin{figure}[h]
 \includegraphics[width=0.50\textwidth]{img/house.png}
 \includegraphics[width=0.50\textwidth]{img/house.jpg}
 \caption{presentation du filtre median}
 \end{figure}
+\newpage
 \subsubsection{La binarisation}
 \subsubsubsection{\textbef{Le concept}}:\\
 Nous utilisons l'algorithme d'Otsu, du nom de son inventeur Nobuyuki Otsu. Qui se base sur l'histogramme d'un image. L'histogramme est un tableau de 255 element, ici des entiers, qui represente le nombre d'occurence d'un niveau de gris ( les niveau de gris allant de 0 (blanc) a 255 (noir). Dans un permier temps va creer un tableau pour y mettre les valeur traiter de l'histogramme de la maniere suivante 
@@ -77,6 +80,29 @@ Nous utilisons l'algorithme d'Otsu, du nom de son inventeur Nobuyuki Otsu. Qui s
 \[ p_{i} = \frac{h_{i}} {width * height}\]
 \end{center}
 qui renvoie la population du niveau de gris i dans l'ensemble des pixels de l'image.
+Nous allons ensuite traiter tout les pixels de l'image en fonction de ce tableau et de deux autres formules magique ! qui sont pour un pixel k :\\
+\begin{minipage}[h]{5cm}
+\begin{lstlisting}
+v = 0;
+for i = 0 to k do 
+  v = v + h.(i) * i 
+done
+return v
+\end{lstlisting}
+\end{minipage}
+\begin{minipage}[h]{5cm}
+\begin{lstlisting}
+m = 0
+for i = 0 to k do
+  m = m +. h.(i) * i
+done 
+return m
+\end{lstlisting}
+\end{minipage}
+\\Le tout est injecter dans la formule
+
+\[ s = v(i,p) \times (1 - v(i,p) \times (p.(255)) \times v(i,p) - m(i,p))^{2}\]
+ 
 \subsubsection{Détection d'angle}
 Je me suis donc occupe de la transformation de Hough. La transforme de hough est une techmiaue de reconnaissance de formes invente en 1962 par Paul Hough.
 Le principe qui sous-tend la transforme de Hough est qu'il existe un nombre infini de ligne passant par un point dont la seule difference est l'orientation (l'angle). La transforme generalise de Houg fonctionne sur le principe qu'une droite peux s'ecrire sous la forme 
