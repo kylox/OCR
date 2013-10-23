@@ -24,12 +24,12 @@ let main () =
             (*Image_helper.show !dst display;*)
             Printf.printf "image_to_grey\n";
             wait_key ();
-(*
+
             Median.median img !dst; 
             Image_helper.show !dst display;
             Printf.printf "median\n";
             wait_key ();
-*)
+
 (*            Binarize.binarize !dst;
             Image_helper.show !dst display;
             Printf.printf "binarize\n";

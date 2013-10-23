@@ -57,11 +57,17 @@ a l'ensemble des pixels de l'image. Le niveau de gris est operationel dans notre
 \includegraphics[width=0.50\textwidth]{img/lena.jpg}
 \caption{avec et sans nuance (captain obvious is obvious)}
 \end{figure}
+\newpage{}
 \subsubsection{Le filtre median}
 \subsubsubsection{\textbf{Le concept}}:\\
 Le filtre median va pour chaque pixels de l'image recupere le triplet (R,G,B) de chaque pixel autour du pixel traite et trier ces pixels par ordre croissant. Il suffit juste de recuperer la valeur mediane de la liste trier. Le passe dans cette algo et qyue l'on doit passer les pixels sur une autre image pour pas fausser les calculs sur la premiere image !
 \subsubsubsection{\textbf{La realisation}}\\
-En pratique ce filtre ne s'applique pas sur toute les images car sinon elle floute l'image et la rend intraitable. Je suis actuellement en recherche d'un algorithme permettant de palier ce gros probleme. Au niveau aulgoritemiaue on obtiens 
+En pratique ce filtre ne s'applique pas sur toute les images car sinon elle floute l'image et la rend intraitable. Je suis actuellement en recherche d'un algorithme permettant de palier ce gros probleme. Au niveau aulgoritemiaue on obtiens
+\begin{figure}[h]
+\includegraphics[width=0.50\textwidth]{img/house.png}
+\includegraphics[width=0.50\textwidth]{img/house.jpg}
+\caption{presentation du filtre median}
+\end{figure}
 \subsubsection{La binarisation}
 \subsubsubsection{\textbef{Le concept}}:\\
 Nous utilisons l'algorithme d'Otsu, du nom de son inventeur Nobuyuki Otsu. Qui se base sur l'histogramme d'un image. L'histogramme est un tableau de 255 element, ici des entiers, qui represente le nombre d'occurence d'un niveau de gris ( les niveau de gris allant de 0 (blanc) a 255 (noir). Dans un permier temps va creer un tableau pour y mettre les valeur traiter de l'histogramme de la maniere suivant 
@@ -69,23 +75,15 @@ Nous utilisons l'algorithme d'Otsu, du nom de son inventeur Nobuyuki Otsu. Qui s
 \[ p_{i} = \frac{h_{i}} {width * height}\]
 \end{center}
 qui renvoie la population du niveau de gris i dans l'ensemble des pixels de l'image.
-
-\subsubsection{Detection d'angle}
+\subsubsection{rotation}
 Je me suis donc occupe de la transformation de Hough. La transforme de hough est une techmiaue de reconnaissance de formes invente en 1962 par Paul Hough.
 Le principe qui sous-tend la transforme de Hough est qu'il existe un nombre infini de ligne passant par un point dont la seule difference est l'orientation (l'angle). La transforme generalise de Houg fonctionne sur le principe qu'une droite peux s'ecrire sous la forme 
 \[r = x\cos{\theta}+y\sin{\theta}\]
 A chaque pixels noir on essaye de trouver la vlauer maximum de r. Cette valeur represente la droite qui alligne le plus de pixel noir. On la retiens et on vote dans un tableau pour son angle associer. On recommence sur tout les pixels. L'angle qui a recu le plus de vote estl'anlge de rotation de l'image( minore de la moitier de l'intervalle pour pouvoir faire ressortir les angles negatifs). 
-
 \begin{figure}[hp]
 \centering
 \includegraphics[width=0.80\textwidth]{img/hough.png}
 \end{figure}
-
-\subsubsection{Rotation}
-La rotation est effectue grace a une matrice de rotation. La methode consiste a assosicie chaque pixel (i, j) a une matrice [|[|i|]; [|j|]|] puis d'utilliser la formule suivate : $A_{i,j}R_{\theta} = A'_{i,j}$ avec R = [|[|cos \theta; -sin \theta|]; [|sin \theta; cos \theta|]|] 
-Le resulta sera alors de la forme [|[|i'|]; [|j'|]|], il faut alors creer une image d'une (diag, diag) avec diag la diagonal de l'image source, puis assigne la couleur du pixel (i, j) au pixel (i', j').
-
-
 \subsection{Decoupage de l'image}
 \subsection{Perceptron}
 \section{Conclusion}
