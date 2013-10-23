@@ -7,7 +7,7 @@
 \usepackage {times}
 \usepackage{fancyhdr}
 \usepackage{bm}
-\usepackage{listing}
+\usepackage{listings}
 \title{Projet CamlT'OCR par SMK \~Cahier des charges}
 \pagestyle{fancyplain} \lhead{\textit{Projet DotNet}} \rhead{\textit{KMnO4}}
 \date{24-10-2014}
@@ -79,7 +79,27 @@ qui renvoie la population du niveau de gris i dans l'ensemble des pixels de l'im
 Je me suis donc occupe de la transformation de Hough. La transforme de hough est une techmiaue de reconnaissance de formes invente en 1962 par Paul Hough.
 Le principe qui sous-tend la transforme de Hough est qu'il existe un nombre infini de ligne passant par un point dont la seule difference est l'orientation (l'angle). La transforme generalise de Houg fonctionne sur le principe qu'une droite peux s'ecrire sous la forme 
 \[r = x\cos{\theta}+y\sin{\theta}\]
-A chaque pixels noir on essaye de trouver la vlauer maximum de r. Cette valeur represente la droite qui alligne le plus de pixel noir. On la retiens et on vote dans un tableau pour son angle associer. On recommence sur tout les pixels. L'angle qui a recu le plus de vote estl'anlge de rotation de l'image( minore de la moitier de l'intervalle pour pouvoir faire ressortir les angles negatifs). 
+A chaque pixels noir on essaye de trouver la vlauer maximum de r. Cette valeur represente la droite qui alligne le plus de pixel noir. On la retiens et on vote dans un tableau pour son angle associer. On recommence sur tout les pixels. L'angle qui a recu le plus de vote estl'anlge de rotation de l'image( minore de la moitier de l'intervalle pour pouvoir faire ressortir les angles negatifs).
+\\
+Voici le principe de l'algo en pseudo code :
+\begin{lstlisting}
+for y =0 to hauteur de l'image do
+    for x =0 to largeur de l'image do
+        if (pixel noir ) then
+           angle = -Pi/2
+           while (angle < Pi/2) do
+            begin
+              r = x*cos(angle)+y*sin(angle)
+              if(r>o) then
+             /* increment tableau de vote */          
+              angle ++
+            end
+        end
+     done
+done
+
+\end{lstlisting} 
+
 \begin{figure}[hp]
 \centering
 \includegraphics[width=0.80\textwidth]{img/hough.png}
