@@ -4,7 +4,7 @@ let _ = GMain.init ()
 let window = GWindow.window
   ~title:"CamlT'OCR"
   ~height:700
-  ~width:1000 ()
+  ~width:700 ()
  
 (* Pack principal qui contient tous les widget *)
 let vboxall = GPack.vbox
@@ -65,22 +65,29 @@ let vbox2 = GPack.vbox
   ~border_width:10
   ~packing:mil#add ()
  
+let bopen =GButton.button
+	~label:"open"
+		~packing:item#add ()
+
 let bgrey = GButton.button
 	 ~label:"To Grey"
-		~packing:item#add () 
+		~packing:item2#add () 
              
-let bflitrelissage = GButton.button
+let bnb = GButton.button
   ~label:"N&B"
-        ~packing:(item2#add) ()
+        ~packing:(item3#add) ()
  
+let bbina = GButton.button
+	~label:"Binarisation"
+		~packing:item4#add ()
  
 let brotation = GButton.button
   ~label:"Rotation"
-        ~packing:(item3#add) ()
+        ~packing:(item5#add) ()
  
-let bextraction = GButton.button
-  ~label:"Extraction"
-        ~packing:(item4#add) ()
+let bmedian = GButton.button
+  ~label:"Filtre mediant"
+        ~packing:(item6#add) ()
  
 
  
