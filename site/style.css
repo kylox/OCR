@@ -107,6 +107,7 @@ a img {
 
 .filAriane {
 	color:#999999;
+        text-align :justify;
 }
 
 .justify {
@@ -184,6 +185,7 @@ a img {
 		}
 		
 		#contents {
+                        text-align:justify;
 			position:relative;
 			left:244px;
 			width:620px;
