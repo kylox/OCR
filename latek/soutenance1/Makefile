@@ -2,10 +2,13 @@ TEX = pdflatex -shell-escape -interaction=nonstopmode -file-line-error
 
 .PHONY: all view
 
-all : main.pdf
+all : rapport.pdf
 
 view :
-	open main.pdf
+	evince rapport.pdf
 
-main.pdf : main.tex
-	$(TEX) main.tex
+rapport.pdf : rapport.tex
+	$(TEX) rapport.tex
+
+clean ::
+	rm -f *.aux *.log *.pdf *.toc

@@ -1,0 +1,60 @@
+\documentclass{article}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{eurosym}
+\usepackage {times}
+\usepackage{fancyhdr}
+\usepackage{bm}
+\usepackage{listing}
+ 
+\setlst{language=Caml}
+\title{Projet CamlT'OCR par SMK \~Cahier des charges}
+\pagestyle{fancyplain} \lhead{\textit{Projet DotNet}} \rhead{\textit{KMnO4}}
+\date{24-10-2014}
+\author{
+    Timothe \textit{Tim-Tim} Bureau-Godart(bureau\_t) \and
+        Leopold \textit{Meta} Szabatura (szabat\_l) \and
+        Louis \textit{Zab} Forget (forget\_l) \and
+        Maxime \textit{Kylox} Gaudron (gaudro\_m)
+        1      }
+
+
+\begin{document}
+\maketitle
+\tableofcontents
+\section{Introduction}
+\addcontentsline{toc}{section}{Introduction}
+Dans le cadre de notre specialisation en informatique a l'EPITA, nous avons eu comme projet smestrielle la realisation d'un ocr ( Optical Character Recognition). Ce projet ce deroule sur 4 mois en Ocaml, un langage develloper par l'INRIA. Nous presentons donc dans ce rapport l'etat d'avancement du projet a la vielle de la premiere soutenance. Ce projet a ete realise par quattre membre fidele et devoue a la bonne cause celle de notre ocr ! 
+\subsection{presentation des membres}
+\subsubsection{Louis "\textit{Zab}" Forget}
+\subsubsection{Timothe "\textit{Tim-Tim}" Bureau Godart}
+\subsubsection{Leopold "\textit{Meta}" Szabatura}
+\subsubsection{Maxime "\textit{kylox}" Gaudron}
+\subsection{organisation du projet}
+\section{Les taches}
+\subsection{quelque mots sur le site internet}
+\subsection{Interface graphique}
+\subsection{Traitement d'image}
+\subsubsection{Le niveau de gris}
+\subsubsubsection{\textbf{Le concept}}:\\
+Une image se compose d'element appeler pixel et definie par trois composante (en realite quattres mais ceci est une autre histoire) qui sont R,G et B correspondant au valeur Red, Green et Blue d'un pixel. Cette etape est primordiale car elle va permettre le bon traitement de l'image par l'ensemble des etapes aui la succede.\\
+\subsubsubsection{\textbf{La realisation}}:\\
+Pour realiser ce niveau de gris on va travailler sur le trois composante d'un pixel et appliquer la fromule suivante :
+\\
+\begin{center}
+\[x = \frac{0.299 \times R + 0.587 \times G + 0.114 \times B}{3}\]
+
+a l'ensemble des pixels de l'image.
+
+\end{center}
+\subsubsection{Le filtre median}
+\subsubsection{La binarisation}
+\subsubsection{rotation}
+\subsection{Decoupage de l'image}
+\subsection{Perceptron}
+\section{Conclusion}
+
+
+\end{document}
