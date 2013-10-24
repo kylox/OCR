@@ -37,7 +37,7 @@ let hough matrice =
            done;
         done;
         print_float(!teta_max);
-        (!teta_max)
+        (!teta_max)(*+.pi02) *)
 
 
 let img2matrice img =
