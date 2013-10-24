@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[12pt]{article}
 \usepackage[french]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -21,6 +21,7 @@
 
 \begin{document}
 \maketitle
+\newpage
 \tableofcontents
 \newpage
 \section{Introduction}
@@ -38,7 +39,6 @@ C'est pendant cette année de seconde que, en fouillant sur ma calculatrice, j'a
 Cela m'a rapidement mené sur la voix du java ou je faisais mes premiers pas dans le monde de la programmation oriente objet.
 \subsubsection{Maxime "\textit{kylox}" Gaudron}
 J'ai toujours vécu dans un monde plus ou moin informatisé. Adepte de tout les petits appareils electroniques et mecaniques. A tel point que je démontais tout et que plus rien ne marchait ! Je me suis donc mis naturellement à aller chercher un peu plus loin dans le fonctionement interne des appareils. L'ocr est donc pour moi un grand apprentissage et une decouverte qui permet d'envisager differente possibilite de reconnaissance et de systemes automatisé ! 
-\subsection{organisation du projet}
 \newpage
 \section{Les taches}
 \subsection{quelque mots sur le site internet}
@@ -138,7 +138,14 @@ return m
 \\Le tout est injecter dans la formule
 
 \[ s = v(i,p) \times (1 - v(i,p) \times (p.(255)) \times v(i,p) - m(i,p))^{2}\]
- 
+La methode de binarisation est plutot au point nous obtenons de tres bon resultats !
+\begin{figure}[h]
+  \includegraphics[width=0.50\textwidth]{img/bin.png}
+  \includegraphics[width=0.50\textwidth]{img/bin2.png}
+\end{figure}
+Nous pouvons donc passer à la rotation !
+\newpage
+\subsection{la rotation d'image}
 \subsubsection{Détection d'angle}
 Je me suis donc occupe de la transformation de Hough. La transforme de hough est une techmiaue de reconnaissance de formes invente en 1962 par Paul Hough.
 Le principe qui sous-tend la transforme de Hough est qu'il existe un nombre infini de ligne passant par un point dont la seule difference est l'orientation (l'angle). La transforme generalise de Houg fonctionne sur le principe qu'une droite peux s'ecrire sous la forme 
@@ -164,20 +171,20 @@ done
 
 \end{lstlisting} 
 
-\begin{figure}[hp]
+\begin{figure}[h]
 \centering
 \includegraphics[width=0.80\textwidth]{img/hough.png}
 \end{figure}
+\newpage
 \subsection{La rotation}
 La rotation est effectue grace a une matrice de rotation. La methode consiste a assosicie chaque pixel (i, j) a une matrice [|[|i|]; [|j|]|] puis d'utilliser la formule suivate :
 \\
 $A_{i,j}R_{\theta} = A'_{i,j}$ avec R = [|[|cos \theta; -sin \theta|]; [|sin \theta; cos \theta|]|] 
 \\
 Le resultat sera alors de la forme [|[|i'|]; [|j'|]|], il faut alors creer une image d'une (diag, diag) avec diag la diagonal de l'image source, puis assigne la couleur du pixel (i, j) au pixel (i', j').
-
+\newpage
 \subsection{Decoupage de l'image}
 Le decoupage de l'image s'effectue en deux etapes, la premiere est de creer deux histogrammes, l'un representant le nombre de pixel noir sur sur chaque colonne et l'autre sur chaque ligne. Puis nous allons analyser chaque histogramme separement, l'histogramme va etre parcouru, et si le contenu est plus eleve qu'un certain seuil, la case sera considerer comme du texte, des premiers blocks vont donc etre forme, une fois ces blocks formees l'algorithme est reappele mais cette fois avec le deuxieme histogramme ce qui a pour effet de redecouper les blocks et d'enlever de plus en plus de parties blanches. Le processus est appele recursivement jusqu'a ce que les blocks aient la taille d'un charactere.
-
 
 \subsection{Perceptron}
 Un perceptron est compose dune liste de poids, grace a un certain nombre d'entre et a une fonction dite a seuil, il va fournir une sortie grace a la formule suivante:
@@ -203,7 +210,7 @@ Un reseau de neurone est compose de n couche de neurone, une couche de neurone e
 \section{Conclusion}
 Et c'est ainsi que petit a petit notre ocr avance pas a pas nous pensons ne pas etre en retard et avoir meme de l'avance ! 
 nous devions faire pour cette soutenance :
-\begin{itemize}a
+\begin{itemize}
   \item Chargement et pre-traitement:
     \begin{itemize}
       \item passage au niveau de gris : FAIT !
