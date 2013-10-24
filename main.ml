@@ -49,12 +49,13 @@ let main () =
                 else
                   if (Sys.argv).(1) = "-r" then 
                     begin
+                      dst := img;
+                        wait_key ();
                       let im2mat = Rotation.img2matrice !dst in
                       let angle = Rotation.hough im2mat in
-                        dst := Pre_treatment.rot !dst 0.0;
+                        dst := Pre_treatment.rot !dst angle;
                         Image_helper.show !dst display;
                         Printf.printf "rot\n";
-                        wait_key ();
                     end
                     else
                       if(Sys.argv).(1) = "-x" then
@@ -65,10 +66,15 @@ let main () =
                           Binarize.binarize !dst;
                           Image_helper.show !dst display;
                           Printf.printf "binarize\n";
+                          let im2mat = Rotation.img2matrice !dst in
+                          let angle = Rotation.hough im2mat in
+                          dst := Pre_treatment.rot !dst angle;
+                          Image_helper.show !dst display;
+                          Printf.printf "rot\n";
                           Xy_cut.test_blocks !dst;
                           Image_helper.show !dst display;
                           Printf.printf "xycut\n";
-                          wait_key ();
+                          wait_key (); 
                         end;
         (* 
          (*
