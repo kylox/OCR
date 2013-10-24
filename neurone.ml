@@ -53,7 +53,7 @@ let print_neurone neurone f =
 	Printf.printf "|] -> %f \n" (eval neurone f)
 	
 let print_learning neurone f array_test array_res n =
-	Printf.printf "learning %d : " n;
+	Printf.printf "\nlearning %d : " n;
 	Printf.printf "weights : [|";
 	Array.iter (fun x -> Printf.printf "%f; " x) neurone.weights;
 	Printf.printf "|]\n";
@@ -68,9 +68,11 @@ let neurone = create 3
 
 let array_test = [|[|1.; 1.; 1.|]; [|1.; 0.; 1.|]; [|1.; 1.; 0.|]; [|1.; 0.; 0.|]|]
 
-let array_res = [|1.; 1.; 1.; 0.|]
+let array_res = if Array.length Sys.argv > 4 then [|float_of_string
+Sys.argv.(1); float_of_string Sys.argv.(2);
+float_of_string Sys.argv.(3); float_of_string Sys.argv.(4)|] else [|1.; 1.; 1.; 0.|]
 
 (*let g x = 1. /. (1. +. exp (-.x));;*)
 let f x = if x > 0. then 1. else 0.;;
-Printf.printf "neurone.ml";
+Printf.printf "neurone.ml\n";
 learn_all neurone f array_test array_res 0.1 30 print_learning;;
