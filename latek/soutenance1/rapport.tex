@@ -44,18 +44,24 @@ J'ai toujours vécu dans un monde plus ou moin informatisé. Adepte de tout les 
 \subsection{quelque mots sur le site internet}
 Pour commencer, vous pouvez trouver notre site web à l'adresse suivante : cmalt-ocr.epiproject.eu.\\
 Pour ce site, nous avons décidé de commencer avec une interface simple, épuré et pas très rechercher pour facilité la navigation. Pour cela, nous n'avons utilisé que du HTML et du CSS. Notre site est hébergé sur le serveur de de Louis Forget. Cependant, nous ne comptons pas en rester la, nous envisageons de le continuer et de l'améliorer au file du temps, ainsi nous pourrons avoir un site beau et esthétique pour la dernière soutenance. Les future amélioration comprenne en grande partie l'utilisation de PHP pour mieux gérer les pages, car pour le moment, une modification sur le squelette principale d'une des pages n'entraine pas la modification sur le squelette de toute les autre page, ce qui nous oblige à faire la modification sur toute les pages à la main, ce qui est relativement pénible quand on a beaucoup de page, c'est en partie pour cette raison que nous n'avons pas énormément de page pour le moment.\\ 
-
+\begin{figure}[h]
+  \begin{center}
 \includegraphics[width=0.50\textwidth]{img/site.png}
-
- 
+\caption{la page principale du site internet}
+\end{center}
+\end{figure}
+\newpage 
 \subsection{Interface graphique}
 Ce projet est pour nous le moyen de découvrir les bases et les approffondissements de la programmation d’un OCR, et d’en avoir (dans cette partie) une première approche simple et concrète de l’interface graphique. Pour une première approche, nous avons décidé de vous présenter une interface fonctionnelle, afin de vous donner une vision simpliste d’un OCR achevé. Pour cela, nous avons utilisé la lablGTK, qui est est un éditeur d’interface plutôt intuitif se basant sur un principe simple : pour créer une interface, on commence par créer une fenetre dans laquelle on met des «boites» qui vont contenir ce que l’on appelle des widgets (ou gadgets en français). Ces derniers peuvent servir à diffentes choses, du genre mettre une image ou encore des boutons.\\
 L’interface graphique est un composant important pour notre projet puisqu’elle sera le seul contact qu’aura l’utilisateur avec notre programme. Par conséquent, cette dernière  devra être claire, simple d’utilisation et un minimum attractive pour l’utilisateur.\\
 Cette interface graphique constitue mine de rien un enjeu assez important, étant
 donné que c’est elle qui va permettre à l’utilisateur d’avoir accès à toutes les fonctionnalités. Elle se doit donc d’être intuitive et très simple d’utilisation et, dès son premier abord, l’utilisateur doit se sentir à l’aise avec chaque fonctionnalité pour apprécier le logiciel.
-
+\begin{figure}[h]
+\begin{center}
 \includegraphics[width=0.50\textwidth]{img/gui.png}
-
+\caption{exemple de la fenetre}
+\end{center}
+\end{figure}
 \subsubsection{Les box}
 Ces derniers représentent la logique de Gtk, ce sont les éléments principaux
 de l’interface graphique au niveau de sa conception car ils ne sont pas vraiment
@@ -198,7 +204,9 @@ $\sigma entree_{i}.poids_{i} > seuil$
 \\
 Une fois le perceptrion structure il faut quil puisse apprendre, cest a dire modifier ses poids pour qu'il donne de bons resultas. Pour ce faire il faut lui passer une batterie de tests avec les resultats escomptes. On va alors evaluer le neurone avec un test et regarder si le resultat est le bon, si ce n'est pas le cas le poid va alors etre corrige selon la formule suivante: 
 \\
-$poid = poid + entree*(sortieVoulu - sortieReel)$.
+\begin{center}
+$poid = poid + entree \times (sortieVoulu - sortieReel)$.
+\end{center}
 \\
  Ces tests sont effectues jusqu'a ce que toutes les sorties soient bonnes: le perceptron a alors appris.
 
