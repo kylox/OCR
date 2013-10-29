@@ -12,5 +12,5 @@ SRC= post_treatment/post_treatment.ml main.ml
 ocr: ${OTH} ${PRE} ${BIN} ${ROT} ${SRC}
 	    ${OCAML} ${OCAMLFLAGS} ${OCAMLLD} ${DIRS} -o ocr ${OTH} ${PRE} ${BIN} ${ROT} ${SRC} 
 	     
-clean::
-	    rm -Rf *~ *.o *.cm? ocr 
+clean:: $(OTH) $(PRE) $(BIN) $(ROT) $(SRC)
+	    rm -rf  *.o *.cm? ocr 
