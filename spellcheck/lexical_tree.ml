@@ -20,12 +20,12 @@ let rec insert w d =
       d
     else
       match d with 
-          [] -> [Letter (sw.[i], n = 1, insert (String.sub sw (i-1) (n+1)) [])]
+          [] -> [Letter (sw.[i], n = 1, insert (String.sub sw (i+1) (n-1)) [])]
         |(Letter (c, b, l))::t when c = sw.[i] ->
             if n = 1 then
               (Letter (c, true , l))::t
             else
-              (Letter(c ,b, insert (String.sub sw (i-1) (n+1)) l))::t
+              (Letter(c ,b, insert (String.sub sw (i+1) (n-1)) l))::t
         |(Letter (c, b, l))::t -> (Letter (c,b,l))::(insert sw t) 
   in aux w 0 (String.length w)
 

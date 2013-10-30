@@ -17,16 +17,21 @@ let words s =
   let w = ref [] in
   let start = ref (String.length s) in
     for i = String.length s-1 downto 0 do
-      if s.[i] = ' '|| s.[i] = ',' || s.[i] = ';' || s.[i] = ':' || s.[i] = '!' || s.[i] = '?' || s.[i] = '.' || s.[i] = '/' then 
-        let s1 = String.sub s i (!start-i) in 
+      if s.[i] = ' '|| s.[i] = ',' || s.[i] = ';' || s.[i] = ':' || s.[i] = '!' || s.[i] = '?' || s.[i] = '.' || s.[i] = '/' || s.[i] = '\'' then 
+        begin
+        let s1 = String.sub s (i+1) (!start-(i+1)) in 
           w := s1::!w;
           start := i;
+        end
   done;
 (!w)
+
+let s = "bonjour je suis une petite patate"
+
 (*verify if each word in l is in d and build the list of unknown word*)
 let rec verify d l =  match l with 
     [] -> []
-  |w::r -> if Lexical_tree.exists w d then verify d l else w::verify d r
+  |w::r -> if not (w = "") && Lexical_tree.exists w d then verify d r else w::verify d r
 
 let rec add w l = match l with
   [] -> (w,1)::[]
@@ -52,7 +57,19 @@ let load_dico file =
     with
         End_of_file ->close_in f; dico := Lexical_tree.construct !l; !dico
       |x -> close_in f; raise x
-
+       
+let test_words () =
+  let f = open_in "texte.txt" and res = ref[] in
+    try
+      while true do 
+        let s = input_line f in
+        let w = words s in
+          res := w::!res;
+      done;
+        failwith "impossible"
+    with
+        End_of_file -> close_in f; !res
+      |x -> close_in f; raise x
 
 let spellcheck dico file =
   let f = open_in file and res = ref [] in
@@ -60,8 +77,11 @@ let spellcheck dico file =
     while true do 
       let s = input_line f in
       let w = words s in
+        print_string("decoupe done");
       let bw = verify dico w in
+       print_string (" verification done");
       res := list_add !res bw ;
+       print_newline();
     done;
     failwith "imposible case"
     with
@@ -73,8 +93,8 @@ let rec display_res l = match l with
   |(a,b)::r -> print_string(a);print_string(" - ");print_int(b);print_newline(); display_res r
 
 let main () =
-  let dico = load_dico (Sys.argv).(1) (*in*)
-  (*let res = spellcheck dico (Sys.argv).(2) in*)
+  let dico = load_dico (Sys.argv).(1) in
+  let res = spellcheck dico (Sys.argv).(2) in
     display_res res
   
   let _ = main ()
