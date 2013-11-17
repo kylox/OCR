@@ -28,16 +28,37 @@ let main () =
             wait_key ();
           end
         else
-          if(Sys.argv).(1)  = "-b" then
+          if (Sys.argv).(1) = "-c" then
             begin
-              To_grey.image_to_grey img !dst;
-              Image_helper.show !dst display;
-              Printf.printf "image_to_grey\n";
-              Binarize.binarize !dst;
-              Image_helper.show !dst display;
-              Printf.printf "binarize\n";
-              wait_key ();
+              if (Sys.argv).(3) = "flou" then
+                begin 
+                  Convolution.flou img !dst;
+                  Image_helper.show !dst display;
+                  Printf.printf("flou done!");
+                  wait_key();
+                end
+              else
+                if(Sys.argv).(3) = "bords" then 
+                  begin
+                    Convolution.bord img !dst;
+                    Image_helper.show !dst display;
+                    Printf.printf("bord done!");
+                    wait_key();
+                  end
+                else
+                  Printf.printf("please chose a valid filter : ./ocr -b [img] [flou|bord]")
             end
+          else
+            if(Sys.argv).(1)  = "-b" then
+              begin
+                To_grey.image_to_grey img !dst;
+                Image_helper.show !dst display;
+                Printf.printf "image_to_grey\n";
+                Binarize.binarize !dst;
+                Image_helper.show !dst display;
+                Printf.printf "binarize\n";
+                wait_key ();
+              end
             else
               if(Sys.argv).(1) = "-m" then 
                 begin

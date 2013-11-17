@@ -102,7 +102,7 @@ let rec correct dico l =
     |w::r -> let sol = possibilities dico w in
      let rec build_sol = function
          [] -> [] 
-       |m::t when get_distance w m <= 4 ->
+       |m::t when get_distance w m <= 2 ->
            print_string(m);
            print_string(" - ");
            print_string(w);
