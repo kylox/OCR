@@ -38,17 +38,17 @@ let get_distance x y =
 
 let words s = 
   let w = ref [] in
-  let start = ref (String.length s) in
-    for i = String.length s-1 downto 0 do
-      if s.[i] = ' '|| s.[i] = ',' || s.[i] = ';' || s.[i] = ':' || s.[i] = '!' || s.[i] = '?' || s.[i] = '.' || s.[i] = '/' || s.[i] = '\'' then 
+  let start = ref 0 in
+    for i = String.length s downto 0 do
+      if i = String.length s || s.[i] = ' '|| s.[i] = ',' || s.[i] = ';' || s.[i] = ':' || s.[i] = '!' || s.[i] = '?' || s.[i] = '.' || s.[i] = '/' || s.[i] = '\'' then
         begin
-          let s1 = String.sub s (i+1) (!start-(i+1)) in 
+          let s1 = String.sub s !start (i-1) in 
             w := s1::!w;
-            start := i;
+            start := i+1;
         end
     done;
     (!w)
-
+(*
 (*verify if each word in l is in d and build the list of unknown word*)
 
 let rec verify d l =  match l with 
@@ -173,3 +173,4 @@ let main () =
     display_core core
 
 let _ = main ()
+ *)

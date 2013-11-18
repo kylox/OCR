@@ -10,7 +10,7 @@ let moy k h =
     for i = 0 to k do
       m:= !m +.  h.(i)
     done;
-    (!m)
+    (!m /. (float_of_int k))
 
 let otsu img = 
   let (w,h) = Image_helper.get_dims img in
