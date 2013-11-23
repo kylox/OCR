@@ -1,105 +1,138 @@
+module Aux =
+  struct
+    let load (text : GText.view) file =
+      let ich = open_in file in
+      let len = in_channel_length ich in
+      let buf = Buffer.create len in
+      Buffer.add_channel buf ich len;
+      close_in ich;
+      text#buffer#set_text (Buffer.contents buf)
+
+    let save (text : GText.view) file =
+      let och = open_out file in
+      output_string och (text#buffer#get_text ());
+      close_out och
+  end
+
 let _ = GMain.init ()
- 
+
 (* Fenêtre principale de l'application. *)
-let window = GWindow.window
-  ~title:"CamlT'OCR"
-  ~height:700
-  ~width:700 ()
- 
-(* Pack principal qui contient tous les widget *)
-let vboxall = GPack.vbox
-  ~packing:window#add ()
- 
-(* Pack dans lequel il y a la toolbar *)
- 
-let box = GPack.vbox
-        ~packing:vboxall#add ()
- 
-let toolbar = GButton.toolbar  
-  ~orientation:`HORIZONTAL  
-  ~style:`ICONS
-  ~packing:(box#pack ~expand:false) ()
- 
-let item = GButton.tool_item  ~packing:toolbar#insert ()
-let item2 = GButton.tool_item  ~packing:toolbar#insert ()
-let item3 = GButton.tool_item  ~packing:toolbar#insert ()
-let item4 = GButton.tool_item  ~packing:toolbar#insert ()
-let item5 = GButton.tool_item  ~packing:toolbar#insert ()
-let item6 = GButton.tool_item  ~packing:toolbar#insert ()
- 
-(* Pack du milieu *)
-let mil = GPack.hbox
-  ~packing:vboxall#add ()
- 
-(* Pack de gauche *)
+let window =
+  let wnd = GWindow.window   
+    ~height:700
+    ~resizable:false
+    ~position:`CENTER
+    ~title:"CamlT'OCR" () in
+  wnd#connect#destroy GMain.quit;
+  wnd
+
 let vbox = GPack.vbox
-        ~height: 600
-  ~packing:mil#add ()
- 
-let separator = GMisc.separator `HORIZONTAL
-        ~packing:(vbox#pack ~expand:false) ()
- 
+  ~spacing:5
+  ~border_width:5
+  ~packing:window#add ()
+
+let bbox = GPack.button_box `HORIZONTAL
+  ~spacing:5
+  ~layout:`SPREAD
+  ~packing:(vbox#pack ~expand:false) ()
+
+
+(*message de fermeture *)
+let confirm _ =
+  let msg = GWindow.message_dialog
+    ~message:"<b><big>Voulez-vous vraiment quitter ?</big>\n\n\
+      Attention :\nToutes les modifications non enregistrées seront perdues.</b>\n"
+    ~parent:window
+    ~destroy_with_parent:true
+    ~use_markup:true
+    ~message_type:`QUESTION
+    ~position:`CENTER_ON_PARENT
+    ~buttons:GWindow.Buttons.yes_no () in
+  let res = msg#run () = `NO in
+  msg#destroy ();
+  res
+
+(*open and load *)
+let action_button stock event action =
+  let dlg = GWindow.file_chooser_dialog
+    ~action:`OPEN
+    ~parent:window
+    ~position:`CENTER_ON_PARENT
+    ~destroy_with_parent:true () in
+  dlg#add_button_stock `CANCEL `CANCEL;
+  dlg#add_select_button_stock stock event;
+  let btn = GButton.button ~stock ~packing:bbox#add () in
+  GMisc.image ~stock ~packing:btn#set_image ();
+  btn#connect#clicked (fun () ->
+    if dlg#run () = `OPEN then Gaux.may action dlg#filename;
+    dlg#misc#hide ());
+  btn
+
+
 (* Image *)
  
 let image = GMisc.image
         ~file: "lena.jpg"
   ~packing:(vbox#pack ~expand:false) ()
  
-(* Bouton pour up l'img *)
  
-let image_print () =
-                ignore (GMisc.image
-                ~file: "lena.jpg"
-                ~packing:vbox#pack() )
- 
-let display = Gaux.may ~f:image#set_file
- 
-let affiche btn () = Gaux.may print_endline btn#filename
- 
- 
- 
-(* Pack de droite *)
- 
-let vbox2 = GPack.vbox
-  ~spacing:10
-  ~border_width:10
-  ~packing:mil#add ()
- 
-let bopen =GButton.button
-	~label:"open"
-		~packing:item#add ()
+let text =
+ let scroll = GBin.scrolled_window
+   ~hpolicy:`ALWAYS
+   ~vpolicy:`ALWAYS
+   ~shadow_type:`ETCHED_IN
+   ~packing:vbox#add () in
+ let txt = GText.view ~packing:scroll#add () in
+ txt#misc#modify_font_by_name "Monospace 10";
+ txt
 
-let bgrey = GButton.button
-	 ~label:"To Grey"
-		~packing:item2#add () 
-             
-let bnb = GButton.button
-  ~label:"N&B"
-        ~packing:(item3#add) ()
- 
-let bbina = GButton.button
-	~label:"Binarisation"
-		~packing:item4#add ()
- 
-let brotation = GButton.button
-  ~label:"Rotation"
-        ~packing:(item5#add) ()
- 
-let bmedian = GButton.button
-  ~label:"Filtre mediant"
-        ~packing:(item6#add) ()
- 
 
- 
-(* Fonction àlakon *)
-(*let print_hello () =
-  let user = Glib.get_user_name () in
-  Printf.printf "Bonjour %s !\n%!" (String.capitalize user)*)
- 
- 
+(*open and save (save marche pas bien)*)
+let action_button stock event action =
+  let dlg = GWindow.file_chooser_dialog
+    ~action:`OPEN
+    ~parent:window
+    ~position:`CENTER_ON_PARENT
+    ~destroy_with_parent:true () in
+  dlg#add_button_stock `CANCEL `CANCEL;
+  dlg#add_select_button_stock stock event;
+  let btn = GButton.button ~stock ~packing:bbox#add () in
+  GMisc.image ~stock ~packing:btn#set_image ();
+  btn#connect#clicked (fun () ->
+    if dlg#run () = `OPEN then Gaux.may action dlg#filename;
+    dlg#misc#hide ());
+  btn
+
+let open_button = action_button `OPEN `OPEN (Aux.load text)
+let save_button = action_button `SAVE `SAVE (Aux.save text)
+
+(*Sélection de couleur. *)
+let color_picker =
+  let dlg = GWindow.color_selection_dialog
+    ~parent:window
+    ~destroy_with_parent:true
+    ~position:`CENTER_ON_PARENT () in
+  dlg#ok_button#connect#clicked (fun () ->
+    text#misc#modify_base [`NORMAL, `COLOR dlg#colorsel#color]);
+  let btn = GButton.button ~label:"Arrière-plan" ~packing:bbox#add () in
+  GMisc.image ~stock:`COLOR_PICKER ~packing:btn#set_image ();
+  btn#connect#clicked (fun () -> ignore (dlg#run ()); dlg#misc#hide ());
+  btn
+
+(*Sélection de fonte. *)
+let font_button =
+  let dlg = GWindow.font_selection_dialog
+    ~parent:window
+    ~destroy_with_parent:true
+    ~position:`CENTER_ON_PARENT () in
+  dlg#ok_button#connect#clicked (fun () ->
+    text#misc#modify_font_by_name dlg#selection#font_name);
+  let btn = GButton.button ~stock:`SELECT_FONT ~packing:bbox#add () in
+  GMisc.image ~stock:`SELECT_FONT ~packing:btn#set_image ();
+  btn#connect#clicked (fun () -> ignore (dlg#run ()); dlg#misc#hide ());
+  btn
+
 let _ =
-  ignore(window#connect#destroy ~callback:GMain.quit);
- 
- 
+  window#event#connect#delete confirm;
   window#show ();
   GMain.main ()
