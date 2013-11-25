@@ -39,16 +39,43 @@ let get_distance x y =
 let words s = 
   let w = ref [] in
   let start = ref 0 in
-    for i = String.length s downto 0 do
-      if i = String.length s || s.[i] = ' '|| s.[i] = ',' || s.[i] = ';' || s.[i] = ':' || s.[i] = '!' || s.[i] = '?' || s.[i] = '.' || s.[i] = '/' || s.[i] = '\'' then
-        begin
-          let s1 = String.sub s !start (i-1) in 
-            w := s1::!w;
-            start := i+1;
-        end
+    for i = 0 to String.length s do
+      begin
+        if i = String.length s || s.[i] = ' ' || s.[i] = ',' ||
+           s.[i] = ';' || s.[i] = ':' || s.[i] = '!' ||
+           s.[i] = '?' || s.[i] = '.' || s.[i] = '/' || s.[i] = '\'' then
+          begin
+            let s1 = String.sub s (!start) (i - !start) in 
+              if(s1 <> " ") then
+                w :=  s1::!w;
+              start := i+1;
+          end
+      end
     done;
     (!w)
-(*
+
+let lowercase w = w.[0] <- Char.lowercase w.[0]
+
+let get_numbers w = 
+  let s = ref "0000" in
+  let j = ref 0 in 
+  let i = ref 1 in
+    String.set !s !j w.[0] ; j := !j + 1;
+    while !i < (String.length w) && !j < 4 do
+      begin 
+        match w.[!i] with
+            'b'|'f'|'p'|'v' -> String.set !s !j '1'; j := !j + 1 
+            |'c'|'g'|'j'|'k'|'q'|'s'|'x'|'z' -> String.set !s !j '2'; j := !j + 1
+            |'d'|'t' ->String.set !s !j '3'; j := !j + 1
+            |'l' ->String.set !s !j '4'; j := !j + 1
+            |'m'|'n' ->String.set !s !j '5'; j := !j + 1
+            |'r' -> String.set !s !j '6'; j := !j + 1
+            |_ -> ()
+      end;
+      i := !i+1
+    done;
+    (s) 
+
 (*verify if each word in l is in d and build the list of unknown word*)
 
 let rec verify d l =  match l with 
@@ -99,10 +126,10 @@ let rec correct dico l =
   print_newline();
   match l with
       [] -> []
-    |w::r -> let sol = possibilities dico w in
+    |w::r ->print_string(w); print_newline(); let sol = possibilities dico w in
      let rec build_sol = function
          [] -> [] 
-       |m::t when get_distance w m <= 2 ->
+       |m::t when get_distance w m <= 4 ->
            print_string(m);
            print_string(" - ");
            print_string(w);
@@ -169,8 +196,6 @@ let main () =
   let dico = load_dico (Sys.argv).(1) in
   let res = spellcheck dico (Sys.argv).(2) in
   let core = correction dico (Sys.argv).(2) in
-    display_res res;
-    display_core core
+    display_res res
 
 let _ = main ()
- *)
