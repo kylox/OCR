@@ -104,6 +104,12 @@ let main () =
                               Image_helper.show !dst display;
                               Printf.printf "binarize\n";
                               let im2mat = Rotation.img2matrice !dst in
+                              (* chgmt : hough sur matrice plus petite*)
+                             (* let little_mat = Rotation.bigmat_2_littlemat 
+                              im2mat in *)
+                              (* Ligne d'au dessu a delete pr hough qui marche
+                               * et ligne d'en dessou on remplace little_mat par
+                               * im2mat *)
                               let angle = Rotation.hough im2mat in
                               dst := Pre_treatment.rot !dst angle;
                               Image_helper.show !dst display;
