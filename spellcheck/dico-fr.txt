@@ -189286,6 +189286,7 @@ ixia
 ixias
 ixode
 ixodes
+j
 jabiru
 jabirus
 jabla
@@ -192175,6 +192176,7 @@ kyste
 kystes
 kystique
 kystiques
+l
 la
 là
 labadens
@@ -199252,6 +199254,7 @@ lysozyme
 lysozymes
 lytique
 lytiques
+m
 ma
 maboul
 maboule
@@ -215544,6 +215547,7 @@ myxoedème
 myxoedèmes
 myxomatose
 myxomatoses
+n
 na
 nabab
 nababs
@@ -251880,6 +251884,7 @@ pyurie
 pyuries
 pyxide
 pyxides
+qu
 quadragénaire
 quadragénaires
 quadragésimal

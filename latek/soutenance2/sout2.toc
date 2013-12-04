@@ -1,0 +1,8 @@
+\select@language {french}
+\contentsline {section}{\numberline {1}Introduction}{3}
+\contentsline {section}{\numberline {2}L'interface graphique}{4}
+\contentsline {section}{\numberline {3}Site Internet}{5}
+\contentsline {section}{\numberline {4}Le pr\IeC {\`e}-traitement}{6}
+\contentsline {section}{\numberline {5}Les filtres de convolution}{7}
+\contentsline {section}{\numberline {6}Le post-traitement}{8}
+\contentsline {section}{\numberline {7}les neuronnes}{9}

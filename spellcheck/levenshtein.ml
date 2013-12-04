@@ -47,14 +47,12 @@ let words s =
           begin
             let s1 = String.sub s (!start) (i - !start) in 
               if(s1 <> " ") then
-                w :=  s1::!w;
+                w :=  (String.uncapitalize s1)::!w;
               start := i+1;
           end
       end
     done;
     (!w)
-
-let lowercase w = w.[0] <- Char.lowercase w.[0]
 
 let get_numbers w = 
   let s = ref "0000" in
@@ -67,14 +65,26 @@ let get_numbers w =
             'b'|'f'|'p'|'v' -> String.set !s !j '1'; j := !j + 1 
             |'c'|'g'|'j'|'k'|'q'|'s'|'x'|'z' -> String.set !s !j '2'; j := !j + 1
             |'d'|'t' ->String.set !s !j '3'; j := !j + 1
-            |'l' ->String.set !s !j '4'; j := !j + 1
-            |'m'|'n' ->String.set !s !j '5'; j := !j + 1
+            |'l' -> String.set !s !j '4'; j := !j + 1
+            |'m'|'n' -> String.set !s !j '5'; j := !j + 1
             |'r' -> String.set !s !j '6'; j := !j + 1
             |_ -> ()
       end;
       i := !i+1
     done;
-    (s) 
+    (!s) 
+
+let compare_numbers s1 s2 =
+  let i = ref 0 in
+  let b = ref true in
+    while !i < 3 && !b do
+      if (s1.[!i] <> s2.[!i]) then
+        begin
+          b := false
+        end;
+      i := !i + 1
+    done;
+    (!b)
 
 (*verify if each word in l is in d and build the list of unknown word*)
 
@@ -122,19 +132,13 @@ let possibilities dico w =
   in test pos
 
 let rec correct dico l =
-  print_string("debut de la correction : ");
-  print_newline();
   match l with
       [] -> []
-    |w::r ->print_string(w); print_newline(); let sol = possibilities dico w in
+    |w::r -> let sol = possibilities dico w in
      let rec build_sol = function
          [] -> [] 
        |m::t when get_distance w m <= 4 ->
-           print_string(m);
-           print_string(" - ");
-           print_string(w);
-           print_newline(); 
-           m::(build_sol t)
+             m::(build_sol t)
        |m::t ->
            (build_sol t)
      in build_sol sol
@@ -158,16 +162,18 @@ let spellcheck dico file =
       while true do 
         let s = input_line f in
         let w = words s in
-          print_string("decoupe done");
           let bw = verify dico w in
-            print_string (" verification done");
             res := list_add !res bw ;
-            print_newline();
       done;
       failwith "imposible case"
     with
         End_of_file -> close_in f; !res
       |x -> close_in f; raise x
+
+let rec display_core l = match l with
+    [] -> ()
+  |w::r -> print_string(w);print_string(" ");display_core r
+
 
 let correction dico file = 
   let f = open_in file and core = ref [] in
@@ -175,18 +181,23 @@ let correction dico file =
       while true do
         let s= input_line f in
         let w = words s in
-        let bw = verify dico w in 
-          core := correct dico bw;
+          print_string("words : ");
+          display_core w;
           print_newline();
+        let bw = verify dico w in
+          print_string("bw : ");
+          display_core bw;
+          print_newline();
+          print_string("correction : ");
+          core := correct dico bw;
+          display_core !core;
+          print_newline();
+          print_newline()
       done;
       failwith "impossible"
     with
         End_of_file -> close_in f; !core
       |x -> close_in f; raise x 
-
-let rec display_core l = match l with
-    [] -> ()
-  |w::r -> print_string(w);print_newline()
 
 let rec display_res l = match l with
     [] -> ()
@@ -194,8 +205,8 @@ let rec display_res l = match l with
 
 let main () =
   let dico = load_dico (Sys.argv).(1) in
-  let res = spellcheck dico (Sys.argv).(2) in
-  let core = correction dico (Sys.argv).(2) in
-    display_res res
+  ignore (spellcheck dico (Sys.argv).(2)); 
+  ignore (correction dico (Sys.argv).(2));
+    print_newline()
 
 let _ = main ()
