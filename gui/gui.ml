@@ -1,30 +1,30 @@
 module Aux =
 struct
-  let load (text : GText.view) file =
-    let ich = open_in file in
-    let len = in_channel_length ich in
-    let buf = Buffer.create len in
-      Buffer.add_channel buf ich len;
-      close_in ich;
-      text#buffer#set_text (Buffer.contents buf)
+  	let load (image : GMisc.image) file =
+    	let ich = open_in file in
+    	let len = in_channel_length ich in
+    	let buf = Buffer.create len in
+      		Buffer.add_channel buf ich len;
+      		close_in ich;
+      		image#set_image (Buffer.contents buf)
 
-  let save (text : GText.view) file =
-    let och = open_out file in
-      output_string och (text#buffer#get_text ());
-      close_out och
+  	let save (text : GText.view) file =
+    	let och = open_out file in
+      		output_string och (text#buffer#get_text ());
+      		close_out och
 end
 
 let _ = GMain.init ()
 
 (* Fenêtre principale de l'application. *)
 let window =
-  let wnd = GWindow.window   
-              ~height:700
-              ~resizable:true
-              ~position:`CENTER
-              ~title:"CamlT'OCR" () in
-    ignore( wnd#connect#destroy GMain.quit);
-    wnd
+  	let wnd = GWindow.window   
+        		~height:700
+                ~resizable:true
+              	~position:`CENTER
+              	~title:"CamlT'OCR" () in
+    			ignore( wnd#connect#destroy GMain.quit);
+    			wnd
 
 let vbox = GPack.vbox
              ~spacing:5
@@ -40,7 +40,7 @@ let bbox = GPack.button_box `HORIZONTAL
 let confirm _ =
   let msg = GWindow.message_dialog
               ~message:"<b><big>Voulez-vous vraiment quitter ?</big>\n\n\
-                                                                  Attention :\nToutes les modifications non enregistrées seront perdues.</b>\n"
+                        Attention :\nToutes les modifications non enregistrées seront perdues.</b>\n"
               ~parent:window
     ~destroy_with_parent:true
     ~use_markup:true
@@ -56,7 +56,7 @@ let image = GMisc.image
               ~file: "lena.jpg"
               ~packing:(vbox#pack ~expand:false) ()
 
-
+(*Boite de texte*)
 let text =
   let scroll = GBin.scrolled_window
                  ~hpolicy:`ALWAYS
@@ -70,7 +70,7 @@ let text =
 
 (*open and save (save marche pas bien)*)
 let action_button stock event action =
-  let dlg = GWindow.file_chooser_dialog
+  let dlg = GWindow.file_chooser_image
               ~action:`OPEN
               ~parent:window
               ~position:`CENTER_ON_PARENT
