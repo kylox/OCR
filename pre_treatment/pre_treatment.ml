@@ -61,4 +61,5 @@ let rot img angle =
   done
   done;
   dst
- 		
+
+let resize img = 		
