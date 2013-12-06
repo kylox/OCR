@@ -61,5 +61,21 @@ let rot img angle =
   done
   done;
   dst
+(* h1 w1 => hauteur et largeur de l'image de base , h2 w2 => hauteur et largeur de l'image redimensionne *)
+let resize img h2 w2=
+  let(w1,h1) =Image_helper.get_dims img in
+  let dst = Array.make_matrix h2 w2 255 in
+  let x_ratio =w1/w2 in
+  let y_ratio = h1/h2 in
+  for y=0 to h2-1 do
+    for x=0 to w2-1 do
+      begin
+       let (x2,y2) = (x*x_ratio,y*y_ratio) in
+       dst.((y*w2)+x).((x*h2)+y) <- img.((y2*w1)+x2).((x2*h1)+y2)
+      end
+    done
+  done;
+dst
 
-let resize img = 		
+
+ 		
