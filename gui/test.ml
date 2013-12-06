@@ -12,19 +12,50 @@ let vbox = GPack.vbox
 	~spacing:10
 	~packing:window#add ()
 
-(*les boite bouton*)
-let bbox = GPack.button_box `HORIZONTAL
-   	~spacing:5
-    ~layout:`SPREAD
-    ~packing:(vbox#pack ~expand:false) ()
+(*toolbar*)
+let toolbar = GButton.toolbar  
+  ~orientation:`HORIZONTAL  
+  ~style:`ICONS 
+  ~packing:(vbox#pack ~expand:false) ()
+
+
+let dialog =
+  let dlg = GWindow.file_chooser_dialog 
+  	~action:`SAVE () in
+  	dlg#add_button_stock `CANCEL `CANCEL;
+  	dlg#add_select_button_stock `SAVE `SAVE;
+  	dlg
+
+let save () =
+  if dialog#run () = `SAVE then Gaux.may print_endline dialog#filename;
+  dialog#misc#hide ()
+
+let save_button =
+  let button = GButton.tool_button 
+  	~stock:`SAVE () 
+  	~packing:toolbar#insert () in
+  	button#connect#clicked save;
+  	button
+
+
+
+let treatment = 
+	let button = GButton.tool_button
+		~label:"treatment"
+    	~packing:toolbar#insert () in
+  		button#connect#clicked (*~callback: fonction de traitement*);
+  		button
+
 
 (*bouton quit*)
 let quit = 
-  let button = GButton.button
+  let button = GButton.tool_button
     ~stock:`QUIT
-    ~packing:bbox#add () in
-  button#connect#clicked ~callback:GMain.quit;
-  button
+    ~packing:toolbar#insert () in
+  	button#connect#clicked ~callback:GMain.quit;
+  	button
+
+
 
 (*boite horizontal*)
 let hbox = GPack.hbox 
