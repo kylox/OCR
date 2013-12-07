@@ -1,7 +1,5 @@
 let _ = GMain.init ()
 
-let x = ref ""
-
 (*fenètre principale*)
 let window = GWindow.window
 	~title: "OCR"
@@ -72,26 +70,14 @@ let scroll = GBin.scrolled_window  (*barre de défillement*)
     	~packing:hbox#add ()
 
 
-let get_contents = function
-  | Some x -> "%x"
-  | _ -> raise Not_found
+let button = GFile.chooser_button
+  ~title:"Browse"
+  ~action:`OPEN
+  ~packing:item#add ()
 
-let may_print btn () = Gaux.may print_endline btn#filename
-
-let open_button = 
-  let button = GFile.chooser_button
-    ~action:`OPEN
-    ~packing:item#add () in
-  	button#connect#selection_changed (may_print button);
-  	button
-
-
-let image = GMisc.image
-  ~file: "rot.jpg"
-  ~packing:scroll#add_with_viewport ()
-
-
-
+let image = GMisc.image 
+  ~width:560 ~height:400
+  ~packing:(scroll#add_with_viewport) ()
 
 (*le texte*)
 let text =
@@ -107,6 +93,8 @@ let text =
 
  
 let _ =
+	let display = Gaux.may ~f:image#set_file in
+      button#connect#selection_changed (fun () -> display button#filename);
 	window#connect#destroy ~callback:GMain.quit;
   	window#show ();
   	GMain.main ()
