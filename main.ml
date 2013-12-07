@@ -104,19 +104,16 @@ let main () =
                               Image_helper.show !dst display;
                               Printf.printf "binarize\n";
                               let im2mat = Rotation.img2matrice !dst in
-                              (* chgmt : hough sur matrice plus petite*)
-                             (* let little_mat = Rotation.bigmat_2_littlemat 
-                              im2mat in *)
-                              (* Ligne d'au dessu a delete pr hough qui marche
-                               * et ligne d'en dessou on remplace little_mat par
-                               * im2mat *)
-                              let angle = Rotation.hough im2mat in
+			      let little = Pre_treatment.resize im2mat 200 200 in
+                               Image_helper.show little display;
+                              
+                             (* let angle = Rotation.hough im2mat in
                               dst := Pre_treatment.rot !dst angle;
                               Image_helper.show !dst display;
                               Printf.printf "rot\n";
                               Xy_cut.test_blocks !dst (if (Array.length Sys.argv > 3) then int_of_string (Sys.argv).(3) else 6);
                               Image_helper.show !dst display;
-                              Printf.printf "xycut\n";
+                              Printf.printf "xycut\n";*) 
                               wait_key (); 
                             end;
         (* 
