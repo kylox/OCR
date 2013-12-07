@@ -1,5 +1,7 @@
 let _ = GMain.init ()
 
+let x = ref ""
+
 (*fenètre principale*)
 let window = GWindow.window
 	~title: "OCR"
@@ -15,8 +17,11 @@ let vbox = GPack.vbox
 (*toolbar*)
 let toolbar = GButton.toolbar  
   ~orientation:`HORIZONTAL
-  ~packing:(vbox#pack ~expand:false) ()
+  ~style:`ICONS
+  ~packing:vbox#pack ()
 
+let item = GButton.tool_item ~packing:toolbar#insert ()
+let item2 = GButton.tool_item ~packing:toolbar#insert ()
 
 (*boite horizontal*)
 let hbox = GPack.hbox 
@@ -33,6 +38,24 @@ let treatment =
 
 
 
+(*button save*)
+let dialog =
+  let dlg = GWindow.file_chooser_dialog ~action:`SAVE () in
+  dlg#add_button_stock `CANCEL `CANCEL;
+  dlg#add_select_button_stock `SAVE `SAVE;
+  dlg
+
+let may_save () =
+  if dialog#run () = `SAVE then Gaux.may print_endline dialog#filename;
+  dialog#misc#hide ()
+
+let save =
+let button = GButton.button
+	~stock:`SAVE
+	~packing:item2#add () in
+	button#connect#clicked may_save;	
+	button
+
 (*bouton quit*)
 let quit = 
   let button = GButton.tool_button
@@ -41,26 +64,7 @@ let quit =
   	button#connect#clicked ~callback:GMain.quit;
   	button
 
-
-(*boite horizontal*)
-let hbox = GPack.hbox 
-  ~spacing:10
-  ~packing:vbox#add ()
-
-let may_print btn () = Gaux.may print_endline btn#filename
-
 (*l'image*)
-let open_button = 
-  let button = GFile.chooser_button
-    ~action:`OPEN
-    ~packing:(vbox#pack ~expand:false) () in
-  button#connect#selection_changed (may_print button);
-  button
-
-  let get_contents = function
-  | Some x -> "%x"
-  | _ -> raise Not_found
-
 let scroll = GBin.scrolled_window  (*barre de défillement*)
     	~hpolicy:`ALWAYS
     	~vpolicy:`ALWAYS
@@ -68,9 +72,25 @@ let scroll = GBin.scrolled_window  (*barre de défillement*)
     	~packing:hbox#add ()
 
 
+let get_contents = function
+  | Some x -> "%x"
+  | _ -> raise Not_found
+
+let may_print btn () = Gaux.may print_endline btn#filename
+
+let open_button = 
+  let button = GFile.chooser_button
+    ~action:`OPEN
+    ~packing:item#add () in
+  	button#connect#selection_changed (may_print button);
+  	button
+
+
 let image = GMisc.image
-  ~filename: get_contents open_button
-  ~packing:(scroll#add_with_viewport)
+  ~file: "rot.jpg"
+  ~packing:scroll#add_with_viewport ()
+
+
 
 
 (*le texte*)
