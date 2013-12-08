@@ -64,6 +64,19 @@ let rot img angle =
 
 let contour img dst = Convolution.bord img dst;
   dst
+
+
+let invert_black_white mat =
+   let(w,h) = (Array.length mat,Array.length mat.(0)) in
+   for y = 0 to h-1 do
+   for x = 0 to w-1 do
+     if(mat.(x).(y) = (0,0,0)) then
+        mat.(x).(y) <- (255,255,255)
+     else
+        mat.(x).(y) <-(0,0,0)
+   done
+   done;
+(mat)
 (*h1, w1 => hauteur et largeur de l'image de base , h2 w2 => hauteur et largeur de l'image redimensionne,img est la matrice image de base *)
   let resize img h2 w2=
   let(w1,h1) =(Array.length img,Array.length img.(0)) in
