@@ -18,6 +18,9 @@ let main () =
       let (w,h) = Image_helper.get_dims img in
       let display = Sdlvideo.set_video_mode w h [`DOUBLEBUF] in
       let dst = ref (Sdlvideo.create_RGB_surface_format img [] w h) in
+ (*       if (Sys.argv.(1) = "-gui") then 
+          Test.start  
+        else*)
         if(Sys.argv).(1) = "-g" then 
           begin
             To_grey.image_to_grey img !dst;

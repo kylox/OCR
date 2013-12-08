@@ -113,7 +113,7 @@ let confirm _ =
   dialog#destroy ();
   res 
 
-let _ =
+let start =
 	let display = Gaux.may ~f:image#set_file in
       button#connect#selection_changed (fun () -> display button#filename);
 	window#event#connect#delete confirm;
