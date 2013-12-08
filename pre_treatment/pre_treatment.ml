@@ -67,7 +67,7 @@ let contour img dst = Convolution.bord img dst;
 (*h1, w1 => hauteur et largeur de l'image de base , h2 w2 => hauteur et largeur de l'image redimensionne,img est la matrice image de base *)
   let resize img h2 w2=
   let(w1,h1) =(Array.length img,Array.length img.(0)) in
-  let dst = Array.make_matrix h2 w2 255 in
+  let dst = Array.make_matrix h2 w2 (255,255,255) in
   let x_ratio =w1/w2 in
   let y_ratio = h1/h2 in
   for y=0 to h2-1 do

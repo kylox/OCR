@@ -104,8 +104,13 @@ let main () =
                               Image_helper.show !dst display;
                               Printf.printf "binarize\n";
                               let im2mat = Rotation.img2matrice !dst in
-			      let little = Pre_treatment.resize im2mat 200 200 in
-                               Image_helper.show little display;
+                              Printf.printf "Etape1 \n";
+			      let littlemat = Pre_treatment.resize im2mat 100 100 in
+			      Printf.printf "etape2";
+                              let littleim = Rotation.mat2img !dst littlemat in
+ 			      Printf.printf "e3";
+                              Image_helper.show littleim display;
+                              
                               
                              (* let angle = Rotation.hough im2mat in
                               dst := Pre_treatment.rot !dst angle;
