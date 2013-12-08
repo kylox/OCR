@@ -84,6 +84,15 @@ let main () =
                         wait_key();
                     end
                     else
+                      if(Sys.argv).(1) = "-re" then
+		      begin
+		      let im2mat = Rotation.img2matrice !dst in
+                      let littlemat = Pre_treatment.resize im2mat 600 600 in
+                      let littleimg =Rotation.mat2img !dst littlemat in
+		      Image_helper.show littleimg display;
+                      wait_key ();
+		      end
+                      else
                       if(Sys.argv).(1) = "-x" then
                         begin 
                           To_grey.image_to_grey img !dst;
@@ -109,7 +118,7 @@ let main () =
                               Printf.printf "binarize\n";
                               let im2mat = Rotation.img2matrice !dst in
                               Printf.printf "Etape1 \n";
-			      let littlemat = Pre_treatment.resize im2mat 100 100 in
+			      let littlemat = Pre_treatment.resize im2mat 800  800 in
 			      Printf.printf "etape2";
                               let littleim = Rotation.mat2img !dst littlemat in
  			      Printf.printf "e3";
