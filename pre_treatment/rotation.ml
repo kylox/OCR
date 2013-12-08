@@ -57,21 +57,15 @@ let creat_white_mat x y =
     (matrix)
 
 
-    (* fonction qui fait une petite matrice pour faire HOUGH! HOUGH! HOUGH! HOUGH!
-     * HOUGH! en mode on divise la matrice image par 2 *)
-let bigmat_2_littlemat oldMat = 
-    let (w,h) =(Array.length oldMat,Array.length oldMat.(0)) in
-    let xscale = float 2 /. float w in
-    let yscale = float 2 /. float h in
-    let (xs,ys) =(truncate xscale,truncate yscale) in
-    let newMat = creat_white_mat(xs)(ys) in
-    for y=0 to h-1 do
-        for x=0 to w-1 do
-            if(oldMat.(x).(y) =(0,0,0)) then
-                begin
-                    newMat.(xs/x).(ys/y) <- oldMat.(x).(y)
-            end;
-        done;
-    done;
-        (newMat)
+let mat2img img mat =
+	let(w,h) = (Array.length mat,Array.length mat.(0)) in
+	  for y=0 to h-1 do
+            for x=0 to w-1 do
+              if(mat.(x).(y) = (0,0,0)) then
+                Sdlvideo.put_pixel_color img x y (0,0,0)
+               else
+                 Sdlvideo.put_pixel_color img x y (255,255,255)
+              done
+             done;
+(img)
 
