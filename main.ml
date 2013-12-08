@@ -41,7 +41,10 @@ let main () =
                 if(Sys.argv).(3) = "bords" then 
                   begin
                     Convolution.bord img !dst;
-                    Image_helper.show !dst display;
+                    let matrice = Rotation.img2matrice !dst in
+                    let newmat = Pre_treatment.invert_black_white matrice in
+                    let newim = Rotation.mat2img !dst newmat in   
+                    Image_helper.show newim display;
                     Printf.printf("bord done!");
                     wait_key();
                   end
@@ -147,8 +150,8 @@ let main () =
 
           Xy_cut.test_blocks !dst;
           Image_helper.show !dst display;
-          Printf.printf "xycut\n";
-          wait_key ();*)*)
+          Printf.printf "xycut\n"; *)
+          wait_key ();*)
         if (Array.length Sys.argv > 3 && String.length (Sys.argv).(Array.length Sys.argv - 1) > 1) then
             Sdlvideo.save_BMP !dst ((Sys.argv).(Array.length Sys.argv - 1));
         exit 0
