@@ -1,18 +1,19 @@
 module Aux =
-struct
-  	let load (image : GMisc.image) file =
-    	let ich = open_in file in
-    	let len = in_channel_length ich in
-    	let buf = Buffer.create len in
-      		Buffer.add_channel buf ich len;
-      		close_in ich;
-      		image#set_image (Buffer.contents buf)
+  struct
+    let load (text : GText.view) file =
+      let ich = open_in file in
+      let len = in_channel_length ich in
+      let buf = Buffer.create len in
+      Buffer.add_channel buf ich len;
+      close_in ich;
+      text#buffer#set_text (Buffer.contents buf)
 
-  	let save (text : GText.view) file =
-    	let och = open_out file in
-      		output_string och (text#buffer#get_text ());
-      		close_out och
-end
+    let save (text : GText.view) file =
+      let och = open_out file in
+      output_string och (text#buffer#get_text ());
+      close_out och
+  end
+
 
 let _ = GMain.init ()
 
@@ -69,7 +70,7 @@ let text =
 
 
 (*open and save (save marche pas bien)*)
-let action_button stock event action =
+(* let action_button stock event action =
   let dlg = GWindow.file_chooser_image
               ~action:`OPEN
               ~parent:window
@@ -86,7 +87,7 @@ let action_button stock event action =
 
 let open_button = action_button `OPEN `OPEN (Aux.load text)
 let save_button = action_button `SAVE `SAVE (Aux.save text)
-
+ *)
 (*FIX ME*)
 let transfer = GButton.button ~label:"transfert" ~packing:bbox#add ()
 

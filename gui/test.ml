@@ -1,11 +1,15 @@
 let _ = GMain.init ()
 
 (*fenètre principale*)
-let window = GWindow.window
-	~title: "OCR"
+let window =
+	let win = GWindow.window
+	~title: "CamlT'OCR"
 	~height:700
 	~width:1200 ()
-	~resizable:true
+	~resizable:true in
+	win#connect#destroy GMain.quit;
+	win
+
 
 (*boite principal à rangement vertical*)
 let vbox = GPack.vbox
@@ -26,12 +30,12 @@ let hbox = GPack.hbox
   ~spacing:10
   ~packing:vbox#add ()
 
-
+(*traitement de l'image*)
 let treatment = 
 	let button = GButton.tool_button
 		~label:"treatment"
     	~packing:toolbar#insert () in
-  		button#connect#clicked (*~callback: fonction de traitement*);
+  		button#connect#clicked(*fonction de traitement*);
   		button
 
 
@@ -53,14 +57,6 @@ let button = GButton.button
 	~packing:item2#add () in
 	button#connect#clicked may_save;	
 	button
-
-(*bouton quit*)
-let quit = 
-  let button = GButton.tool_button
-    ~stock:`QUIT
-    ~packing:toolbar#insert () in
-  	button#connect#clicked ~callback:GMain.quit;
-  	button
 
 (*l'image*)
 let scroll = GBin.scrolled_window  (*barre de défillement*)
@@ -92,9 +88,24 @@ let text =
     txt
 
  
+ (*message de fermeture*)
+let confirm _ =
+  let dialog = GWindow.message_dialog
+    ~message:"<b><big>Voulez-vous vraiment quitter ?</big>\n\n\
+      Attention :\nToutes les modifications seront perdues.</b>\n"
+    ~parent:window
+    ~destroy_with_parent:true
+    ~use_markup:true
+    ~message_type:`QUESTION
+    ~position:`CENTER_ON_PARENT
+    ~buttons:GWindow.Buttons.yes_no () in
+  let res = dialog#run () = `NO in
+  dialog#destroy ();
+  res 
+
 let _ =
 	let display = Gaux.may ~f:image#set_file in
       button#connect#selection_changed (fun () -> display button#filename);
-	window#connect#destroy ~callback:GMain.quit;
+	window#event#connect#delete confirm;
   	window#show ();
   	GMain.main ()
