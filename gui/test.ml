@@ -44,7 +44,7 @@ let treatment =
 	let button = GButton.tool_button
 		~label:"treatment"
     	~packing:toolbar#insert () in
-  		button#connect#clicked;
+  		button#connect#clicked; (*mettre fonction ici*)
   		button
 
 

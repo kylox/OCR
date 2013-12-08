@@ -12,8 +12,6 @@ let rec wait_key () =
 
 let main () =
     begin
-      if Array.length (Sys.argv) < 3 then
-        failwith "Il manque le nom du fichier!";
 
       sdl_init ();
       let img = Sdlloader.load_image Sys.argv.(2) in
