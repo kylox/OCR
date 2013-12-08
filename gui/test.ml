@@ -1,3 +1,12 @@
+module Aux =
+	struct
+		let save (text : GText.view) file =
+      	let och = open_out file in
+      	output_string och (text#buffer#get_text ());
+      	close_out och
+  	end
+
+
 let _ = GMain.init ()
 
 (*fenètre principale*)
@@ -35,28 +44,9 @@ let treatment =
 	let button = GButton.tool_button
 		~label:"treatment"
     	~packing:toolbar#insert () in
-  		button#connect#clicked(*fonction de traitement*);
+  		button#connect#clicked;
   		button
 
-
-
-(*button save*)
-let dialog =
-  let dlg = GWindow.file_chooser_dialog ~action:`SAVE () in
-  dlg#add_button_stock `CANCEL `CANCEL;
-  dlg#add_select_button_stock `SAVE `SAVE;
-  dlg
-
-let may_save () =
-  if dialog#run () = `SAVE then Gaux.may print_endline dialog#filename;
-  dialog#misc#hide ()
-
-let save =
-let button = GButton.button
-	~stock:`SAVE
-	~packing:item2#add () in
-	button#connect#clicked may_save;	
-	button
 
 (*l'image*)
 let scroll = GBin.scrolled_window  (*barre de défillement*)
@@ -65,15 +55,33 @@ let scroll = GBin.scrolled_window  (*barre de défillement*)
     	~shadow_type:`ETCHED_IN
     	~packing:hbox#add ()
 
-
+(*ouverture d'une image*)
 let button = GFile.chooser_button
-  ~title:"Browse"
+  ~title:"Ouvrir"
   ~action:`OPEN
   ~packing:item#add ()
 
 let image = GMisc.image 
   ~width:560 ~height:400
   ~packing:(scroll#add_with_viewport) ()
+
+
+(*sauvegarde du texte*)
+let action_button stock event action =
+  let dlg = GWindow.file_chooser_dialog
+    ~action:`SAVE
+    ~parent:window
+    ~position:`CENTER_ON_PARENT
+    ~destroy_with_parent:true () in
+  dlg#add_button_stock `CANCEL `CANCEL;
+  dlg#add_select_button_stock stock event;
+  let btn = GButton.button ~stock ~packing:item2#add () in
+  GMisc.image ~stock ~packing:btn#set_image ();
+  btn#connect#clicked (fun () ->
+    if dlg#run () = `SAVE then Gaux.may action dlg#filename;
+    dlg#misc#hide ());
+  btn
+
 
 (*le texte*)
 let text =
@@ -87,6 +95,8 @@ let text =
     	txt#misc#modify_font_by_name "Monospace 10";
     txt
 
+
+  let save_button = action_button `SAVE `SAVE (Aux.save text)
  
  (*message de fermeture*)
 let confirm _ =
