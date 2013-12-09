@@ -5,7 +5,7 @@ module Aux =
       	output_string och (text#buffer#get_text ());
       	close_out och
   	end
-
+let doc = ""
 
 let _ = GMain.init ()
 
@@ -45,7 +45,7 @@ let treatment =
 	let button = GButton.tool_button
 		~label:"treatment"
     	~packing:toolbar#insert () in
-  		button#connect#clicked; (*mettre fonction ici*)
+  		button#connect#clicked (*mettre la string de la super fonction dans la variable doc*);
   		button
 
 (*l'image*)
@@ -92,7 +92,11 @@ let text =
     ~vpolicy:`ALWAYS
     ~shadow_type:`ETCHED_IN
     ~packing:hbox#add () in
+  let buf = GText.buffer () in
+    let basetext = doc in
+    buf#set_text(basetext);
   let txt = GText.view 				(*zone de texte*)
+    ~buffer:buf
   	~packing:scroll#add () in
     	txt#misc#modify_font_by_name "Monospace 10";
     txt
