@@ -9,6 +9,8 @@ module Aux =
 
 let _ = GMain.init ()
 
+let img = ref ""
+
 (*fenètre principale*)
 let window =
 	let win = GWindow.window
@@ -18,7 +20,6 @@ let window =
 	~resizable:true in
 	win#connect#destroy GMain.quit;
 	win
-
 
 (*boite principal à rangement vertical*)
 let vbox = GPack.vbox
@@ -47,7 +48,6 @@ let treatment =
   		button#connect#clicked; (*mettre fonction ici*)
   		button
 
-
 (*l'image*)
 let scroll = GBin.scrolled_window  (*barre de défillement*)
     	~hpolicy:`ALWAYS
@@ -65,7 +65,6 @@ let image = GMisc.image
   ~width:560 ~height:400
   ~packing:(scroll#add_with_viewport) ()
 
-
 (*sauvegarde du texte*)
 let action_button stock event action =
   let dlg = GWindow.file_chooser_dialog
@@ -78,10 +77,13 @@ let action_button stock event action =
   let btn = GButton.button ~stock ~packing:item2#add () in
   GMisc.image ~stock ~packing:btn#set_image ();
   btn#connect#clicked (fun () ->
-    if dlg#run () = `SAVE then Gaux.may action dlg#filename;
+    if dlg#run () = `SAVE then 
+      begin 
+        img := dlg#filename; 
+        Gaux.may action dlg#filename
+      end;
     dlg#misc#hide ());
   btn
-
 
 (*le texte*)
 let text =
@@ -94,7 +96,6 @@ let text =
   	~packing:scroll#add () in
     	txt#misc#modify_font_by_name "Monospace 10";
     txt
-
 
   let save_button = action_button `SAVE `SAVE (Aux.save text)
  
@@ -114,8 +115,8 @@ let confirm _ =
   res 
 
 let start =
-	let display = Gaux.may ~f:image#set_file in
-      button#connect#selection_changed (fun () -> display button#filename);
-	window#event#connect#delete confirm;
-  	window#show ();
-  	GMain.main ()
+  let display = Gaux.may ~f:image#set_file in
+    button#connect#selection_changed (fun () -> display button#filename);
+    window#event#connect#delete confirm;
+    window#show ();
+    GMain.main ()
