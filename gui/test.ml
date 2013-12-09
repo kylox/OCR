@@ -5,7 +5,7 @@ module Aux =
       	output_string och (text#buffer#get_text ());
       	close_out och
   	end
-let doc = ""
+let doc = ref ""
 
 let _ = GMain.init ()
 
@@ -94,7 +94,7 @@ let text =
     let basetext = doc in
     buf#set_text(basetext);
   let txt = GText.view 				(*zone de texte*)
-    ~buffer:buf
+    ~buffer:!buf
   	~packing:scroll#add () in
     	txt#misc#modify_font_by_name "Monospace 10";
     txt
