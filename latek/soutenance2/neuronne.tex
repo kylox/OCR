@@ -3,6 +3,11 @@ Nous avons le regret d'annoncer que notre reseau de neuronne n'est pas fonctione
 néanmoins nous avons fait pas mal de recherche la dessus. Tout abords qu'est ce qu'un neurone ? 
 \subsection{un neurone}
 un neurone, en biologie, se compose de plusieur partie, nous allons nous contenter aux plus simples c'est à dire : l'axone et le noyau. l'axone est le lien qui permettra de relier plusieur neurone entre eux et le noyaux son centre de commande la ou se fera l'action du neurone. Notre reseau de neurone vas donc simuler le fonctionnement d'un neurone.
+\begin{figure}[h]
+  \center
+  \includegraphics[width=0.80\textwidth]{neurone.png}
+  \caption{Un neurone}
+\end{figure}
 \subsection{un peu d'histoire}
 Les reseau de neurone et autre perceptron sont une science a multiple facette qui a connu de nombreux retournement de situation. Ils naissent en 1950 de deux neurologues : Warren McCulloch et Walter Pitts.
 \subsection{ce que compose notre reseau de neurone}
@@ -13,6 +18,11 @@ Nous allons donc simuler un neurone formel par :
 \item une valeur 0 ou 1 
 \item un seuil
 \end{itemize}
+\begin{figure}[h]
+  \center
+  \includegraphics[width=0.80\textwidth]{neuroneformle.png}
+  \caption{notre neurone formle}
+\end{figure}
 Le poids sera la "niveau" de notre neurone c'est lui qui decidera si le neurone va être actif ou non, il pêse (jeux de mot) vraiment dans le réseau de neurone.\\
 Sa valeur 0 ou 1 nous travaillons en flottant pour une meilleur valeur de comparaison avec son seuil et sa valeur quand on la passe dans notre fonction sigmoïde (que nous verrons un peu plus loin.\\
 Et finallement son seuil qui determinera si le neroune vaux 1 ou 0. Le poids sera comparer à la sigmoïde de 
@@ -25,12 +35,12 @@ Pour un reseau de neurone il existe plusieur fonction d'activation qui sont :
 \end{itemize}
 \vspace{0.5cm}
 Nous avons choisis d'implementer la fonction sigmoïde car plus partique pour la méthode d'apprentissage par retropropagation.
-Mais faisons tout de même un bref tout d'horizon pour justifer ce choix :
+Mais faisons tout de même un bref tour d'horizon pour justifer ce choix :
 \begin{itemize}
 \item
 La fonction Heaviside est une fonction discontinue tel que :
 \begin{center}
-[\
+\[
   \forall x \in R, H(x) =  0 si x < 0 H(x) = 1 si x >= 0
  \]
 \end{center}

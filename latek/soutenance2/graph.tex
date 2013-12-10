@@ -31,7 +31,6 @@ Mais commençons par le commencement, qu'est ce qu'une interface graphique ?
 			~resizable:true in
 		win\#connect\#destroy GMain.quit;
 		win 
->>>>>>> 1abf27fe9de955bdbe6364a3ebd20fd6416d9e21
 	\end{lstlisting}
 
 	Une fois cette fenêtre créer, il faut lui ajouter des éléments, hors, elle ne peut en accepter qu'un. Généralement, on lui donne un élément qui peut, lui, accépter plusieurs éléments. Nous avont choisi un boite qui range les éléments verticalement plutôt qu'horizontalement car cela nous paraissait plus logique que les boutons soit en haut et non a gauche :\\
@@ -105,8 +104,4 @@ Mais commençons par le commencement, qu'est ce qu'une interface graphique ?
 	Au final, nous avons les élément principaux de l'interface, à savoir l'ouverture d'une image dans une boite contenant des barres de défilements, une zone de texte où l'on peut taper ce que l'on veut, un bouton de sauvegarde du texte, qui enregistre tout le contenu de l'éditeur de texte dans un fichier à l'endroit de notre choix. Cependant, vous constaterez qu'il manque un élément principale, le bouton apliquant les fonction de traitement à l'image. Evidament, nous n'avons pas laissé un bouton vide, nous avons essayer de faire au mieux.
 
 	\subsection{le contournement du problème tant bien que mal}
-<<<<<<< HEAD
-	Le bouton appele bien une fonction qui va traiter l'image,
-=======
 	Le bouton appele bien une fonction qui va traiter l'image, cette fonction est un grand rassemblement de toute les autres fonction et était sencé retourner une chaine de charactère contenant le texte de l'image, chaine de charactère que nous allions ensuite affiché dans l'éditeur de texte prévu à cette effet. Cependant, nous n'avons pas réussi à mettre à jour l'éditeur de texte, et donc, le bouton ne servais donc à rien ! Nous avons donc, en dernier recours, utilisé la fonction pour qu'elle affiche les différentes transformations de l'image dans une fenêtre SDL... Cette solution ne nous convient pas mais nous étions à cours de temps et il fallait prendre une décision.\\
->>>>>>> 1abf27fe9de955bdbe6364a3ebd20fd6416d9e21
