@@ -20,16 +20,16 @@ Mais commençons par le commencement, qu'est ce qu'une interface graphique ?
 	\\
 	Pour commencer, il faut créer une boite principal contenant les différente boite a venir, en gros, nous allons créer la fenêtre principale de notre application qui se fermera quand nous cliquerons sur la croix :\\
 
-	\begin{center}
-	\[		let window =\\
-				let win = GWindow.window\\
-					~title: "CamlT'OCR"\\
-					~height:700\\
-					~width:1200 ()\\
-					~resizable:true in\\
-				win#connect#destroy GMain.quit;\\
-				win \]
-	\end{center}
+	\begin{lstlisting}
+			let window =
+				let win = GWindow.window
+					~title: "CamlT'OCR"
+					~height:700
+					~width:1200 ()
+					~resizable:true in
+				win\#connect\#destroy GMain.quit;
+				win 
+	\end{lstlisting}
 
 	Une fois cette fenêtre créer, il faut lui ajouter des éléments, hors, elle ne peut en accepter qu'un. Généralement, on lui donne un élément qui peut, lui, accépter plusieurs éléments. Nous avont choisi un boite qui range les éléments verticalement plutôt qu'horizontalement car cela nous paraissait plus logique que les boutons soit en haut et non a gauche :\\
 	
