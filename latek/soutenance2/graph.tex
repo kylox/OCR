@@ -27,7 +27,7 @@ Mais commençons par le commencement, qu'est ce qu'une interface graphique ?
 					~height:700
 					~width:1200 ()
 					~resizable:true in
-				win#connect#destroy GMain.quit;
+				win\#connect\#destroy GMain.quit;
 				win \]
 	\end{center}
 
@@ -36,7 +36,7 @@ Mais commençons par le commencement, qu'est ce qu'une interface graphique ?
 	\begin{center}
 	\[ let vbox = GPack.vbox
 			~spacing:10
-			~packing:window#add () \]
+			~packing:window\#add () \]
 	\end{center}
 
 	Le premier élément ajouté à été une bare d'outil pour stocker les boutons cliquable. Elle les disposera de façon horizontal : 
@@ -45,7 +45,7 @@ Mais commençons par le commencement, qu'est ce qu'une interface graphique ?
 	\[ let toolbar = GButton.toolbar  
 		  ~orientation:`HORIZONTAL
 		  ~style:`ICONS
-		  ~packing:vbox#pack ()\]
+		  ~packing:vbox\#pack ()\]
 	\end{center}
 
 	Les diférent boutons sont stockés soit dans des item qui eux même sont stocké dans la bare d'outil, soit directement dans la barre d'outil. Ce choix des items peut paraitre absurde, pourquoi s'embéter à rajouter du code si au final on peut le faire directement ? Et bien c'est parce qu'en fonction du contenu du bouton, il ne pourra pas être stocké n'importe où. par exemple :\\ 
@@ -54,7 +54,7 @@ Mais commençons par le commencement, qu'est ce qu'une interface graphique ?
 	\[ let button = GFile.chooser_button
 		  ~title:"Ouvrir"
 		  ~action:`OPEN
-		  ~packing:item#add ()\]
+		  ~packing:item\#add ()\]
 	\end{center}
 
 	Ce bouton ne pourra pas être mis dans la barre d'outil directement a cause de sa définition :
@@ -74,7 +74,7 @@ Mais commençons par le commencement, qu'est ce qu'une interface graphique ?
 	\begin{center}
 	\[ let image = GMisc.image 
 	  ~width:560 ~height:400
-	  ~packing:(vbox#pack) ()\]
+	  ~packing:(vbox\#pack) ()\]
 	\end{center}
 
 	Cependant, l'image était bien affiché mais elle prenait la place qu'elle voulait, et elle agrandissait la fenêtre quand elle était beaucoup trop grande. Nous avons donc pensé à la redimentionner, et fixer un taille maximal mais nous n'avons pas trouvé de fonction pour nous aider à comprendre comment faire. C'est la que nous est venu une idée, au lieu de la redimentionner, nous allions la mettre dans une boite qui permettait le défillement. Fort heureusement, une tel chose existait et cela résolu nos problème de taille (jeu de mot) aux quels nous étions confronté. Nous avons utilisé les barres de défillement également pour le texte, comme cela nous pouvons écrire autant que nous le voulons.
@@ -84,7 +84,7 @@ Mais commençons par le commencement, qu'est ce qu'une interface graphique ?
     	~hpolicy:`ALWAYS
     	~vpolicy:`ALWAYS
     	~shadow_type:`ETCHED_IN
-    	~packing:hbox#add ()\]
+    	~packing:hbox\#add ()\]
 	\end{center}
 
 	Pour finir, ce début d'interface était assez prometteur, un chargement d'image, une zone de texte pour écrire et éditer, un bouton près a acceuilir une fonction de traitement pour l'image, et même un bouton sauvegarde qui prend le texte écrit et l'enregistre dans un fichier. Cependant, uelque problème nous ont obligé a ne pas faire ce que nous attendions.

@@ -1,11 +1,15 @@
-type edge = {
-  value : int;
-  vertex : (int) list;
+type vertex =
+{
+cost : int;
+succ : int;
+pred : int
 }
 
-type graph = { 
-  ordre : int;
-  edges : edge array;
+type 'a edge = 
+{
+value : 'a;
+succ : vertex list;
+pred : vertex list
 }
 
-let empty_edge () = {value = -1; vertex = [];}
+type graphe = {tab : int * 'a edge array}
