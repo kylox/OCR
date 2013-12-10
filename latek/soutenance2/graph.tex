@@ -14,78 +14,81 @@ Mais commençons par le commencement, qu'est ce qu'une interface graphique ?
 	Malgré toutes ces confusions, nous avons quand même réussi à réalisé une interface graphique qui tiens la route, même si ce n'est pas le résultat que nous attendions.
 
 	\subsection{La réalisation}
-	Pour réaliser notre interface graphique, nous avons utilisé les exemples de plusieur site internet, mais le site qui nous à le plus aidé est à cette adresse :\\
-	http://blog.developpez.com/ocamlblog/\\
+	Pour réaliser notre interface graphique, nous avons utilisé les exemples de plusieur site internet, mais le site qui nous à le plus aidé est à cette adresse :
+	\begin{center}
+	\[http://blog.developpez.com/ocamlblog/\]
+	\end{center}
 	Nous allons vous montrer comment notre interface a été développé et les différent problèmes auquels nous nous somme heurté.\\
 	\\
-	Pour commencer, il faut créer une boite principal contenant les différente boite a venir, en gros, nous allons créer la fenêtre principale de notre application qui se fermera quand nous cliquerons sur la croix :\\
-
+	Pour commencer, il faut créer une boite principal contenant les différente boite a venir, en gros, nous allons créer la fenêtre principale de notre application qui se fermera quand nous cliquerons sur la croix :
+	
 	\begin{lstlisting}
-			let window =
-				let win = GWindow.window
-					~title: "CamlT'OCR"
-					~height:700
-					~width:1200 ()
-					~resizable:true in
-				win\#connect\#destroy GMain.quit;
-				win 
+	let window =
+		let win = GWindow.window
+			~title: "CamlT'OCR"
+			~height:700
+			~width:1200 ()
+			~resizable:true in
+		win\#connect\#destroy GMain.quit;
+		win 
+>>>>>>> 1abf27fe9de955bdbe6364a3ebd20fd6416d9e21
 	\end{lstlisting}
 
 	Une fois cette fenêtre créer, il faut lui ajouter des éléments, hors, elle ne peut en accepter qu'un. Généralement, on lui donne un élément qui peut, lui, accépter plusieurs éléments. Nous avont choisi un boite qui range les éléments verticalement plutôt qu'horizontalement car cela nous paraissait plus logique que les boutons soit en haut et non a gauche :\\
 	
-	\begin{center}
-	\[ let vbox = GPack.vbox\\
-			~spacing:10\\
-			~packing:window#add () \\\]
-	\end{center}
+	\begin{lstlisting}
+	 let vbox = GPack.vbox
+			~spacing:10
+			~packing:window\#add () 
+	\end{lstlisting}
 
 	Le premier élément ajouté à été une bare d'outil pour stocker les boutons cliquable. Elle les disposera de façon horizontal : 
 
-	\begin{center}
-	\[ let toolbar = GButton.toolbar  \\
-		  ~orientation:`HORIZONTAL\\
-		  ~style:`ICONS\\
-		  ~packing:vbox#pack ()\\\]
-	\end{center}
+	\begin{lstlisting}
+	let toolbar = GButton.toolbar
+		  ~orientation:`HORIZONTAL
+		  ~style:`ICONS
+		  ~packing:vbox\#pack ()
+	\end{lstlisting}
 
 	Les diférent boutons sont stockés soit dans des item qui eux même sont stocké dans la bare d'outil, soit directement dans la barre d'outil. Ce choix des items peut paraitre absurde, pourquoi s'embéter à rajouter du code si au final on peut le faire directement ? Et bien c'est parce qu'en fonction du contenu du bouton, il ne pourra pas être stocké n'importe où. par exemple :\\ 
 
-	 \begin{center}
-	\[ let button = GFile.chooser_button\\
-		  ~title:"Ouvrir"\\
-		  ~action:`OPEN\\
-		  ~packing:item#add ()\\\]
-	\end{center}
+	 \begin{lstlisting}
+	let button = GFile.chooser_button
+		  ~title:"Ouvrir"
+		  ~action:`OPEN
+		  ~packing:item\#add ()
+	\end{lstlisting}
 
 	Ce bouton ne pourra pas être mis dans la barre d'outil directement a cause de sa définition :
-	\begin{center}
-	\[ let button = GFile.chooser_button\\\]
-	\end{center}
+	\begin{lstlisting}
+	 let button = GFile.chooser_button
+	\end{lstlisting}
 
 	alors qu'un bouton normal aura l'attribut :
-	\begin{center}
-	\[ let button = GButton.button\\\]
-	\end{center}
+	\begin{lstlisting}
+	let button = GButton.button
+	\end{lstlisting}
 
 	Voici l'un des nombreux problèmes auxquels nous nous somme confronté, pour trouver comment contourner le problème, nous avons dù chercher longtemps et essayer beaucoup de chose avant de trouver celle qui fonctionne le mieux.\\
 	Nous allons passer a la deuxième partie de l'interface, l'affichage de l'image traité et la zone de texte, car qui dit OCR, dit forcément image.\\
 	Nous avions donc un bouton pour ouvrir une image, mais aucun endroit où l'afficher. La fonction d'affichage n'étant pas très compliqué, il nous a falu peut de temps pour la coder :\\
 
-	\begin{center}
-	\[ let image = GMisc.image \\
-	  ~width:560 ~height:400\\
-	  ~packing:(vbox#pack) ()\\\]
-	\end{center}
+	\begin{lstlisting}
+	 let image = GMisc.image 
+	  ~width:560 ~height:400
+	  ~packing:(vbox\#pack) ()
+	\end{lstlisting}
 
 	Cependant, l'image était bien affiché mais elle prenait la place qu'elle voulait, et elle agrandissait la fenêtre quand elle était beaucoup trop grande. Nous avons donc pensé à la redimentionner, et fixer un taille maximal mais nous n'avons pas trouvé de fonction pour nous aider à comprendre comment faire. C'est la que nous est venu une idée, au lieu de la redimentionner, nous allions la mettre dans une boite qui permettait le défillement. Fort heureusement, une tel chose existait et cela résolu nos problème de taille (jeu de mot) aux quels nous étions confronté. Nous avons utilisé les barres de défillement également pour le texte, comme cela nous pouvons écrire autant que nous le voulons.
 
-	\begin{center}
-	\[ let scroll = GBin.scrolled_window\\
-    	~hpolicy:`ALWAYS\\
-    	~vpolicy:`ALWAYS\\
-    	~shadow_type:`ETCHED_IN\\
-    	~packing:hbox#add ()\\\]
-	\end{center}
+	\begin{lstlisting}
+	 let scroll = GBin.scrolled_window
+    	~hpolicy:`ALWAYS
+    	~vpolicy:`ALWAYS
+    	~shadow_type:`ETCHED_IN
+    	~packing:hbox\#add ()
+	\end{lstlisting}
 
 	Pour finir, ce début d'interface était assez prometteur, un chargement d'image, une zone de texte pour écrire et éditer, un bouton près a acceuilir une fonction de traitement pour l'image, et même un bouton sauvegarde qui prend le texte écrit et l'enregistre dans un fichier. Cependant, uelque problème nous ont obligé a ne pas faire ce que nous attendions.
 
@@ -97,9 +100,13 @@ Mais commençons par le commencement, qu'est ce qu'une interface graphique ?
 		\item ouvre une image et l'affiche
 		\item des boite pouvant contenir une image et du texte
 		\item un bouton de traitement de l'image qui, comme son nom l'indique, applique les différente opération à l'image et affiche le texte dans un éditeur de texte
-		\item un bouton de sauvegarde qui enregistre le texte créé dans un fichier.
+		\item un bouton de sauvegarde qui enregistre le texte créé dans un fichier.\\
 	\end{itemize}
 	Au final, nous avons les élément principaux de l'interface, à savoir l'ouverture d'une image dans une boite contenant des barres de défilements, une zone de texte où l'on peut taper ce que l'on veut, un bouton de sauvegarde du texte, qui enregistre tout le contenu de l'éditeur de texte dans un fichier à l'endroit de notre choix. Cependant, vous constaterez qu'il manque un élément principale, le bouton apliquant les fonction de traitement à l'image. Evidament, nous n'avons pas laissé un bouton vide, nous avons essayer de faire au mieux.
 
 	\subsection{le contournement du problème tant bien que mal}
+<<<<<<< HEAD
 	Le bouton appele bien une fonction qui va traiter l'image,
+=======
+	Le bouton appele bien une fonction qui va traiter l'image, cette fonction est un grand rassemblement de toute les autres fonction et était sencé retourner une chaine de charactère contenant le texte de l'image, chaine de charactère que nous allions ensuite affiché dans l'éditeur de texte prévu à cette effet. Cependant, nous n'avons pas réussi à mettre à jour l'éditeur de texte, et donc, le bouton ne servais donc à rien ! Nous avons donc, en dernier recours, utilisé la fonction pour qu'elle affiche les différentes transformations de l'image dans une fenêtre SDL... Cette solution ne nous convient pas mais nous étions à cours de temps et il fallait prendre une décision.\\
+>>>>>>> 1abf27fe9de955bdbe6364a3ebd20fd6416d9e21
