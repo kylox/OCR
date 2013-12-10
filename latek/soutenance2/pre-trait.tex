@@ -105,4 +105,31 @@ La rotation est effectue grace a une matrice de rotation. La methode consiste a 
 Le resultat sera alors de la forme [|[|i'|]; [|j'|]|], il faut alors creer une image d'une (diag, diag) avec diag la diagonal de l'image source, puis assigne la couleur du pixel (i, j) au pixel (i', j').
 \subsection{Decoupage de l'image}
 Le decoupage de l'image s'effectue en deux etapes, la premiere est de creer deux histogrammes, l'un representant le nombre de pixel noir sur sur chaque colonne et l'autre sur chaque ligne. Puis nous allons analyser chaque histogramme separement, l'histogramme va etre parcouru, et si le contenu est plus eleve qu'un certain seuil, la case sera considerer comme du texte, des premiers blocks vont donc etre forme, une fois ces blocks formees l'algorithme est reappele mais cette fois avec le deuxieme histogramme ce qui a pour effet de redecouper les blocks et d'enlever de plus en plus de parties blanches. Le processus est appele recursivement jusqu'a ce que les blocks aient la taille d'un charactere.
+\subsection{Redimensionement de l'image }
+Le redimensionement de l'image est utile pour pouvoir normaliser les caracteres a mettre en entre du reseau de neurone.En effet,toutes les entres du reseau de neurone doivent etre identique.Il est evident que tous les caracteres detecte par l'algorithme de XY-cut n'ont pas la meme taille.Il faut donc mettre a la meme taille tous les caracteres.Il existe plusieurs methode complexe et d'autre moins complexe mais qui provoquent souvent une baisse de la qualite de l'image.J'ai donc utilise une methode intermediaire : l'interpolation bilineaire.
+Enfaite c'est assez simple, dans un premier temps on cree un ratio de largeur (x ratio = largeur de notre image/largeur attendue ) et un ratio de hauteur (y ratio= hauteur de l'image/hauteur attendue). On va cree une matrice correspondant a l'image de destination.A chaque image pixel de coodonne (x,y) de l'image attendue on va attribue les pixels de coordonne (x*x ratio,y * y ratio) de l'image source.
+Voici l'algorithme en pseudo code :
+\begin{lstlisting}
+algorithme zoome (image src , entiers (w1,h2 )) /* dimension image attendue */
+Debut
+  image dst
+  entier x_ratio = src.largeur/w2;
+  entier y_ratio = src.hauteur/h2;
+  pour x=0  a h2-1 faire
+    pour y=0 a w2-1 faire
+      dst(x,y) <-src(x_ratio*x,y_ratio*y);
+    fin  pour
+  fin pour
+retourne dst; 
+\end{lstlisting}
+le probleme  est qu'avec cet algorithme nous creons ce qu'on appel de l'aliasing :
+\begin{figure}[h]
+    \centering
+    \includegraphics[width =0.80\textwidth]{aliasing.jpg}
+\end{figure}
+C'est a dire un trop grand contraste de couleur entre les differents pixels.Visuellement il apparait une forme d'escalier de gros contraste qui degrade fortement l'image. Le probleme de la qualite de l'image n'en est pas vraiment un pour nous.En effet nous travaillons sur des images binarises donc l aliasing cree des contrastes de blanc et de noir , ce qui a pour effet de parfois grossir certaines lettres.Ce probleme est a nouveau regle par le fait que l'on met en entre du reseau de neurone, uniquement le countoure des lettres (filtre laplacien) :
+\begin{figure}[h]
+    \centering
+    \includegraphics[width =0.80\textwidth]{ABCD.jpg}
+\end{figure}
 
