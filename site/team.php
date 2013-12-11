@@ -1,51 +1,25 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15" />
-		<title>CamlT'OCR - Membres</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>CamlT'OCR - Team</title>
 		<link rel="stylesheet" href="style.css" type="text/css"/>
 		
 	</head>
 	
 <body>
-		<!-- = Main Page		  = -->
+		<!-- = Menu				  = -->
+     
+		<?php include("menu.php");?> 
 		
-        <div id="right">
-        </div>
-        
-        <div id="left">
-		</div>  
-        
-		<div id="main">
-		
-        <div id="top">
-					<img src="images/lampe.jpg" alt="none" width="227" height="187" />
-				</a>
-			</div>
+			<!-- = Fin Menu = -->
 			
-			<!-- = Menu				  = -->
-            
-			<div id="page">
-                <div id="menu">
-                    
-							
-                    <div class="menu">
-                        <h3><span class="menu-title"> <a href="main.html" style="color:#006;">Home</a></span>
-                        </h3>
-                        <h3><span class="menu-title"> CamlT'OCR</span>	
-                        </h3>
-                        <ul>
-                            <li><a href="ocr.html">Vous avez dit OC-quoi ??</a></li>
-                            <li><a href="team.html">SMK team</a></li>
-                            <li><a href="downloads.html">T&eacute;l&eacute;chargement</a></li>
-                        </ul>
-					</div>
-                </div>  
-					<!-- = Fin Menu = -->
+			<!-- = Main Page		  = -->
+			
+	<div id="body">
+       <?php include("header.php");?> 
+			
                 <!-- = Content = -->
-    
-                <div id="contents">
-					<span class="filAriane"> <br /> </span>
  <h1>Projet CamlT'OCR </h1><br/>
                     <h2>Les membres de la team SMK</h2>
 <div id="TheTexte">
@@ -68,7 +42,7 @@ J'ai toujours etais tres curieux, au point de partir souvent dans tous les sens.
 <hr style="border:none; border-bottom:dashed #006699 1px;"/>
 <br/>
 
-					<h2>L&eacute;opold Szabatura </h2>
+					<h2>Léopold Szabatura </h2>
 <hr style="border:none; border-bottom:dashed #006699 1px;"/>
 Je me suis intéressé à l'informatique à l'âge de 15 ans.
 C'est pendant cette année de seconde que, en fouillant sur ma calculatrice, j'ai découvert l'univers fantastique de la programmation.
@@ -76,18 +50,25 @@ Cela m'a rapidement mené sur la voix du java ou je faisais mes premiers pas dans
 <hr style="border:none; border-bottom:dashed #006699 1px;"/>
 <br/>
 
-					<h2>Timoth&eacute;e "Timtim" Bureau</h2>
+					<h2>Timothée "Timtim" Bureau</h2>
 <hr style="border:none; border-bottom:dashed #006699 1px;"/>
 Je n'étais encore qu'un gosse quand le drame s'est produit, une attaque de livre dans ma propre maison ! J'étais dépassé, tous ses mots sans définition, tous ses paragraphes sans résumé, j'allais sombrer dans un univers d'horreur et d'épouvante sans pouvoir en ressortir... Quand soudain, la lumière apparu, elle avait la forme d'une gameboy géante et me sauva de l'enfer des livres. Depuis ce jour je lui voue un culte sans précédent et cherche à percer tous ses mystères.
 Très jeune, je possédais déjà mon propre ordinateur, construis par un ami de mes parent, dès lors je n'ai jamais acheté d'ordinateur, je les ai toujours eu en pièce détaché. Cependant je ne m'intéressais pas trop a la programmation bien que cela me titillais un peu de ne pas savoir comment mes personnages de jeux vidéo pouvais attaquer sur la simple pression d'un bouton (car oui, je suis un grand fan de jeu vidéo et j'ai commencé très petit, ce qui est vite devenu une grande passion). J'ai commencé a réellement m'intéresser à cette univers en classe de seconde, grâce à l'option MPI. Je me suis documenté sur plusieurs langages quand j'ai entendu parler d'EPITA, ce qui m'a donné un but, faire partie de cette école pour faire de ma passion mon métier.
 <hr style="border:none; border-bottom:dashed #006699 1px;"/>
 
                 </div> 
-        	</div> 
-		</div>
+
 		<!-- = Footer			  = -->
 	<div id="footer">
+		<div class="footer">
+			<ul>
+				<li><a href="main.php" title="Home" class="hover">home</a></li>
+				<li><a href="ocr.php" title="ocr.">OCR</a></li>
+				<li><a href="team.php" title="team.">Team</a></li>
+				<li><a href="downloads.php" title="downloads">Téléchargement</a></li>
+			</ul></br>
 		<p>I'am the guy who knock !</p>
+	</div>
 	</div>
         
 </body>

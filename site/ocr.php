@@ -1,51 +1,25 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>CamlT'OCR - OCR</title>
 		<link rel="stylesheet" href="style.css" type="text/css"/>
 		
 	</head>
 	
 <body>
-		<!-- = Main Page		  = -->
+		<!-- = Menu				  = -->
+     
+		<?php include("menu.php");?> 
 		
-        <div id="right">
-        </div>
-        
-        <div id="left">
-		</div>  
-        
-		<div id="main">
-		
-        <div id="top">
-					<img src="images/lampe.jpg" alt="none" width="227" height="187" />
-				</a>
-			</div>
+			<!-- = Fin Menu = -->
 			
-			<!-- = Menu				  = -->
-            
-			<div id="page">
-                <div id="menu">
-                    
-							
-                    <div class="menu">
-                        <h3><span class="menu-title"> <a href="main.html" style="color:#006;">Home</a></span>
-                        </h3>
-                        <h3><span class="menu-title"> CamlT'OCR</span>	
-                        </h3>
-                        <ul>
-                            <li><a href="ocr.html">Vous avez dit OC-quoi ??</a></li>
-                            <li><a href="team.html">SMK team</a></li>
-                            <li><a href="downloads.html">T&eacute;l&eacute;chargement</a></li>
-                        </ul>
-					</div>
-                </div>  
-					<!-- = Fin Menu = -->
+			<!-- = Main Page		  = -->
+			
+	<div id="body">
+       <?php include("header.php");?> 
+			
                 <!-- = Content = -->
-   
-                <div id="contents">
-					<span class="filAriane"> <br /> </span>
  <h1>Projet CamlT'OCR </h1><br/>
                     <h2>Vous avez dit OC-quoi ??</h2>
 <hr style="border:none; border-bottom:dashed #006699 1px;"/>
@@ -74,12 +48,18 @@ Les etapes de traitement peuvent etre schematisees ainsi :
   <p class="justify"></p>
 </div>
                     
-                </div> 
-        	</div> 
-		</div>
+            
 		<!-- = Footer			  = -->
 	<div id="footer">
+		<div class="footer">
+			<ul>
+				<li><a href="main.php" title="Home" class="hover">home</a></li>
+				<li><a href="ocr.php" title="ocr.">OCR</a></li>
+				<li><a href="team.php" title="team.">Team</a></li>
+				<li><a href="downloads.php" title="downloads">Téléchargement</a></li>
+			</ul></br>
 		<p>The world is mine</p>
+	</div>
 	</div>
         
 </body>
